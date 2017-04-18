@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace asstool.ViewModel
 {
@@ -29,6 +30,31 @@ namespace asstool.ViewModel
                 }
             }
         }
+
+        private Visibility show = Visibility.Hidden;
+        public Visibility Show
+        {
+            get { return show; }
+            set { show = value; RaisePropertyChanged(); }
+        }
+        
+        #region ass intellisense position
+        private double assCmdLeft = 100;
+        public double AssCmdLeft 
+        {
+            get { return assCmdLeft; }
+            set { assCmdLeft = value; RaisePropertyChanged(); }
+        }
+
+        private double assCmdTop = 100;
+        public double AssCmdTop
+        {
+            get { return assCmdTop; }
+            set { assCmdTop = value; RaisePropertyChanged(); }
+        }
+        #endregion
+
+
         public AssIntellisenseViewModel()
         {
             CmdList = AssCmd.CmdDictionary.Keys.ToList();

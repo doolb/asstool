@@ -8,5 +8,11 @@
     <Setting Name="color" Type="System.String" Scope="User">
       <Value Profile="(Default)">Cyan</Value>
     </Setting>
+    <Setting Name="lang" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="is_run_first" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="menu_color" xml:space="preserve">
-    <value>Color</value>
+    <value>配色</value>
   </data>
   <data name="menu_lang" xml:space="preserve">
-    <value>Language</value>
+    <value>语言</value>
   </data>
   <data name="menu_theme" xml:space="preserve">
-    <value>Theme</value>
+    <value>主题</value>
   </data>
   <data name="msg_change_language" xml:space="preserve">
-    <value>Change language need restart.</value>
+    <value>更换语言需要重启才能生效</value>
   </data>
   <data name="msg_change_language_title" xml:space="preserve">
-    <value>Do you want to change language {0}</value>
+    <value>是否将语言更换为 {0}</value>
   </data>
 </root>

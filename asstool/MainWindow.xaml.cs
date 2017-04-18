@@ -32,6 +32,7 @@ namespace asstool
             InitializeComponent();
 
             set_theme_and_accent();
+            
 
         }
 

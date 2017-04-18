@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:m="clr-namespace:asstool.View"
+        xmlns:p="clr-namespace:asstool.Properties"                   
         Title="AssTool" Height="350" Width="525"
         ShowTitleBar="False"
         Style="{StaticResource WindowStyle}">
     
-    <Grid>
+    <Grid Margin="5">
         <!--#region grid row and column define--> 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,17 +22,43 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Stretch"
               DataContext="{Binding ThemeVM}">
-            <MenuItem Header="Theme"
-                        ItemContainerStyle="{StaticResource AppThemeMenuItemStyle}"
-                        ItemsSource="{Binding AppThemes, Mode=OneWay}" />
-            <MenuItem Header="Accent"
-                        ItemContainerStyle="{StaticResource AccentColorMenuItemStyle}"
-                        ItemsSource="{Binding AccentColors, Mode=OneWay}" />
+            <MenuItem Header="{x:Static p:Resources.menu_theme}"
+                      ItemContainerStyle="{StaticResource AppThemeMenuItemStyle}"
+                      ItemsSource="{Binding AppThemes, Mode=OneWay}" />
+            <MenuItem Header="{x:Static p:Resources.menu_color}"
+                      ItemContainerStyle="{StaticResource AccentColorMenuItemStyle}"
+                      ItemsSource="{Binding AccentColors, Mode=OneWay}" />
+            <MenuItem Header="{x:Static p:Resources.menu_lang}"
+                      ItemContainerStyle="{StaticResource LanguageMenuItemStyle}"
+                      ItemsSource="{Binding Languages,Mode=OneWay}"/>
         </Menu>
 
-        <Canvas Grid.Row="1"
-                Visibility="Visible">
-            <m:AssIntellisense DataContext="{Binding AssCmdVM}"/>
+        <Canvas Grid.Row="1" Panel.ZIndex="1">
+            <m:AssIntellisense DataContext="{Binding AssCmdVM}"
+                               Canvas.Left="{Binding AssCmdLeft}"
+                               Canvas.Top ="{Binding AssCmdTop}"/>
         </Canvas>
+        
+        <Grid Grid.Row="1">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MinHeight="100"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            
+            <ScrollViewer Grid.Row="0">
+                <TextBox Text="{Binding OrgAssCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                         TextWrapping="Wrap"/>
+            </ScrollViewer>
+            
+            <Grid Grid.Row="1"
+                  Name="rtbContain">
+                <RichTextBox>
+                    <FlowDocument PageWidth="{Binding Path=ActualWidth, ElementName=rtbContain,Mode=OneWay}"
+                             />     
+                </RichTextBox>
+            </Grid>
+            
+        </Grid>
     </Grid>
 </metro:MetroWindow>

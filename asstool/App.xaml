@@ -28,7 +28,7 @@
                 <Setter Property="SaveWindowPosition" Value="True"/>
             </Style>
             
-            <!-- #region theme and accent -->
+            <!-- #region menu -->
             <Ellipse x:Key="AppThemeMenuIcon"
                      Width="16"
                      Height="16"
@@ -56,6 +56,13 @@
                 <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
                 <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
                 <Setter Property="Icon" Value="{StaticResource AccentMenuIcon}" />
+            </Style>
+            
+            <Style x:Key="LanguageMenuItemStyle"
+                   BasedOn="{StaticResource MetroMenuItem}"
+                   TargetType="{x:Type MenuItem}">
+                <Setter Property="Command" Value="{Binding ChangeLanguage}"/>
+                <Setter Property="Header"  Value="{Binding Name,Mode=OneWay}"/>
             </Style>
 
             <!-- #endregion -->

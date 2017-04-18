@@ -1,5 +1,7 @@
 ﻿using asstool.Model;
 using MahApps.Metro;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +11,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+
 using Setting = asstool.Properties.Settings;
+using Res = asstool.Properties.Resources;
 
 namespace asstool.ViewModel
 {
@@ -19,6 +23,8 @@ namespace asstool.ViewModel
         public List<AppThemeMenuData> AppThemes { get; set; }
 
         public List<CultureInfo> CultureInfos { get; set; }
+
+        public List<LanguageMenuData> Languages { get; set; }
 
         public ThemeViewModel()
         {
@@ -40,7 +46,8 @@ namespace asstool.ViewModel
                 }).ToList();
 
             CultureInfos = CultureInfo.GetCultures(CultureTypes.InstalledWin32Cultures).ToList();
-            
+
+            Languages = LanguageMenuData.Languages;
         }
     }
 
@@ -88,6 +95,68 @@ namespace asstool.ViewModel
             // store current theme name, so it can be auto load when application start next time
             Setting.Default.theme = this.Name;
             Setting.Default.Save();
+        }
+    }
+
+    public class LanguageMenuData
+    {
+        public string Lang{get;set;}
+
+        public string Name{get;set;}
+
+        private ICommand changeLanguage;
+
+        public ICommand ChangeLanguage
+        {
+            get 
+            {
+                return changeLanguage ??(changeLanguage = new BaseCommand
+                {
+                    ExecuteDelegate = async x=>
+                        {
+                            // just store language
+                            // and ask for relaunch
+                            await ((MetroWindow)Application.Current.MainWindow).ShowMessageAsync(
+                                Res.msg_change_language_title,Res.msg_change_language);
+
+
+                            Setting.Default.lang = this.Lang;
+                            Setting.Default.Save();
+
+                        }
+                });
+
+            }
+        }
+
+        private static List<LanguageMenuData> languages;
+        public  static List<LanguageMenuData> Languages
+        {
+            get
+            {
+                return languages;
+            }
+        }
+
+        static LanguageMenuData()
+        {
+            languages = new List<LanguageMenuData>();
+
+            languages.Add(new LanguageMenuData
+            {
+                Lang = "en",
+                Name = "English"
+            });
+            languages.Add(new LanguageMenuData
+            {
+                Lang = "zh-CN",
+                Name = "中文简体"
+            });
+            languages.Add(new LanguageMenuData
+            {
+                Lang = "zh-TW",
+                Name = "中文繁體"
+            });
         }
     }
 }
