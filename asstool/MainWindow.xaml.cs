@@ -1,5 +1,7 @@
-﻿using MahApps.Metro;
+﻿using asstool.ViewModel;
+using MahApps.Metro;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using Setting = asstool.Properties.Settings;
 
 namespace asstool
@@ -26,9 +27,12 @@ namespace asstool
     {
         public MainWindow()
         {
+            this.DataContext = MainViewModel.Instance;
+
             InitializeComponent();
 
             set_theme_and_accent();
+
         }
 
         void set_theme_and_accent()
@@ -40,6 +44,9 @@ namespace asstool
             {
                 ThemeManager.ChangeAppStyle(Application.Current, accent, theme);
             }
+
         }
+
+
     }
 }

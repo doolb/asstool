@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="asstool.View.AssIntellisense"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Height="210" Width="400"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        
+        <ListBox Style="{StaticResource MetroListBox}"
+                 ItemsSource="{Binding CmdList}"
+                 SelectedIndex="{Binding Index}"
+                 Grid.Column="0"
+                 BorderBrush="{DynamicResource AccentBaseColorBrush}"
+                 BorderThickness="1"/>
+
+        <Grid Name="rtbContain" Grid.Column="1">
+            <RichTextBox    IsReadOnly="True"
+                            BorderBrush="{DynamicResource AccentBaseColorBrush}">
+                <FlowDocument PageWidth="{Binding Path=ActualWidth,ElementName=rtbContain,Mode=OneWay}">
+                    <Paragraph>
+                        <Run Text="{Binding Cmd.Name}" 
+                             FontWeight="Bold"
+                             Foreground="{DynamicResource AccentColorBrush}"
+                             FontSize="18"/>
+                    </Paragraph>
+                    
+                    <Paragraph>
+                        <Run Text="{Binding Cmd.Format}"/>
+                    </Paragraph>
+                    
+                    <Paragraph>
+                        <Border HorizontalAlignment="Stretch">
+                            <TextBlock Text="{Binding Cmd.Example}"/>
+                        </Border>
+                    </Paragraph>
+                    
+                    <Paragraph>
+                        <Run Text="{Binding Cmd.Comment}"/>
+                    </Paragraph>
+
+                
+                </FlowDocument>
+            </RichTextBox>
+        </Grid>
+       
+    </Grid>
+</UserControl>
