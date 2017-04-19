@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:model="clr-namespace:asstool.Model"
+             xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:u2u="clr-namespace:Microsoft.Windows.Controls;assembly=U2UConsult.RichHtmlTextBlock"
              mc:Ignorable="d"
              Height="210" Width="400"
              d:DesignHeight="300" d:DesignWidth="300"
@@ -11,44 +14,26 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*"/>
+            
         </Grid.ColumnDefinitions>
         
+        <Grid.Resources>
+            <u2u:HtmlFormatter x:Key="HtmlFormatter"/>
+        </Grid.Resources>
+        
         <ListBox Style="{StaticResource MetroListBox}"
-                 ItemsSource="{Binding CmdList}"
+                 ItemsSource="{Binding Cmds}"
                  SelectedIndex="{Binding Index}"
                  Grid.Column="0"
                  BorderBrush="{DynamicResource AccentBaseColorBrush}"
                  BorderThickness="1"/>
 
-        <Grid Name="rtbContain" Grid.Column="1">
-            <RichTextBox    IsReadOnly="True"
-                            BorderBrush="{DynamicResource AccentBaseColorBrush}">
-                <FlowDocument PageWidth="{Binding Path=ActualWidth,ElementName=rtbContain,Mode=OneWay}">
-                    <Paragraph>
-                        <Run Text="{Binding Cmd.Name}" 
-                             FontWeight="Bold"
-                             Foreground="{DynamicResource AccentColorBrush}"
-                             FontSize="18"/>
-                    </Paragraph>
-                    
-                    <Paragraph>
-                        <Run Text="{Binding Cmd.Format}"/>
-                    </Paragraph>
-                    
-                    <Paragraph>
-                        <Border HorizontalAlignment="Stretch">
-                            <TextBlock Text="{Binding Cmd.Example}"/>
-                        </Border>
-                    </Paragraph>
-                    
-                    <Paragraph>
-                        <Run Text="{Binding Cmd.Comment}"/>
-                    </Paragraph>
-
-                
-                </FlowDocument>
-            </RichTextBox>
-        </Grid>
-       
+        <ScrollViewer Grid.Column="1" Focusable="False">
+            <u2u:RichTextBox 
+                         Text="{Binding Document}" 
+                         TextFormatter="{StaticResource HtmlFormatter}"
+                         IsReadOnly="True" />
+        </ScrollViewer>
+        
     </Grid>
 </UserControl>

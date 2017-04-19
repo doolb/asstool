@@ -1,9 +1,12 @@
-﻿using System;
+﻿using asstool.Model;
+using asstool.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace asstool.ViewModel
 {
@@ -39,7 +42,22 @@ namespace asstool.ViewModel
 
         #endregion
 
-
+        #region
+        private ICommand showAbout;
+        public  ICommand ShowAbout
+        {
+            get
+            {
+                return showAbout ?? (showAbout = new BaseCommand
+                    {
+                        ExecuteDelegate = x=>
+                            {
+                                new About().ShowDialog();
+                            }
+                    });
+            }
+        }
+        #endregion
         public MainViewModel()
         {
             ThemeVM = new ThemeViewModel();

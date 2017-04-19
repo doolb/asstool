@@ -1,0 +1,6 @@
+	;key/	format/	example/		name/	comment
+	
+	
+fs/		\fs<size>/ \fs50/		Font Size/	The following text will use a size 10 font.
+pos/	\pos (<x>, <y>)/ \pos(470, 260)/	Set position/ Set the position of the line.
+move/	\move (<x1>, <y1>, <x2>, <y2> [, <t1>, <t2>])/ \move (100, 150, 300, 350)/	Movement/ When the line appears on screen, the subtitle is at (100,150). While the subtitle is displayed, it moves at constant speed such that it will arrive at point (300,350) at the same time it disappears.

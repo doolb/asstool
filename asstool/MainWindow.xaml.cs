@@ -32,8 +32,8 @@ namespace asstool
             InitializeComponent();
 
             set_theme_and_accent();
-            
 
+            MainViewModel.Instance.AssCmdVM.Show = Visibility.Visible;
         }
 
         void set_theme_and_accent()

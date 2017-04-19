@@ -70,5 +70,14 @@ namespace asstool.Properties {
                 this["is_run_first"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("v1.0(beta)")]
+        public string version {
+            get {
+                return ((string)(this["version"]));
+            }
+        }
     }
 }

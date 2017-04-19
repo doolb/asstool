@@ -18,26 +18,25 @@
         <!--#end region -->
 
         <Menu Grid.Row="0"
-              Margin="5"
+              Margin="0"
               HorizontalAlignment="Left"
-              VerticalAlignment="Stretch"
-              DataContext="{Binding ThemeVM}">
+              VerticalAlignment="Stretch">
             <MenuItem Header="{x:Static p:Resources.menu_theme}"
                       ItemContainerStyle="{StaticResource AppThemeMenuItemStyle}"
-                      ItemsSource="{Binding AppThemes, Mode=OneWay}" />
+                      ItemsSource="{Binding AppThemes, Mode=OneWay}" 
+                      DataContext="{Binding ThemeVM}"/>
             <MenuItem Header="{x:Static p:Resources.menu_color}"
                       ItemContainerStyle="{StaticResource AccentColorMenuItemStyle}"
-                      ItemsSource="{Binding AccentColors, Mode=OneWay}" />
+                      ItemsSource="{Binding AccentColors, Mode=OneWay}" 
+                      DataContext="{Binding ThemeVM}"/>
             <MenuItem Header="{x:Static p:Resources.menu_lang}"
                       ItemContainerStyle="{StaticResource LanguageMenuItemStyle}"
-                      ItemsSource="{Binding Languages,Mode=OneWay}"/>
+                      ItemsSource="{Binding Languages,Mode=OneWay}"
+                      DataContext="{Binding ThemeVM}"/>
+            <Button   Command="{Binding ShowAbout}"
+                      Content="{x:Static p:Resources.btn_about}"/>
         </Menu>
-
-        <Canvas Grid.Row="1" Panel.ZIndex="1">
-            <m:AssIntellisense DataContext="{Binding AssCmdVM}"
-                               Canvas.Left="{Binding AssCmdLeft}"
-                               Canvas.Top ="{Binding AssCmdTop}"/>
-        </Canvas>
+        
         
         <Grid Grid.Row="1">
             
@@ -50,7 +49,13 @@
                 <TextBox Text="{Binding OrgAssCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                          TextWrapping="Wrap"/>
             </ScrollViewer>
-            
+
+            <Canvas Grid.Row="1" Panel.ZIndex="1">
+                <m:AssIntellisense DataContext="{Binding AssCmdVM}"
+                               Canvas.Left="{Binding AssCmdLeft}"
+                               Canvas.Top ="{Binding AssCmdTop}"/>
+            </Canvas>
+
             <Grid Grid.Row="1"
                   Name="rtbContain">
                 <RichTextBox>

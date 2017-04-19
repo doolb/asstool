@@ -14,6 +14,8 @@ using System.Windows.Media;
 
 using Setting = asstool.Properties.Settings;
 using Res = asstool.Properties.Resources;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace asstool.ViewModel
 {
@@ -116,13 +118,20 @@ namespace asstool.ViewModel
                         {
                             // just store language
                             // and ask for relaunch
-                            await ((MetroWindow)Application.Current.MainWindow).ShowMessageAsync(
-                                Res.msg_change_language_title,Res.msg_change_language);
+                            MessageDialogResult ret =  await ((MetroWindow)Application.Current.MainWindow).ShowMessageAsync(
+                                string.Format(Res.msg_change_language_title,this.Name),
+                                Res.msg_change_language,
+                                MessageDialogStyle.AffirmativeAndNegative);
 
+                            if (ret == MessageDialogResult.Affirmative)
+                            {
+                                Setting.Default.lang = this.Lang;
+                                Setting.Default.Save();
 
-                            Setting.Default.lang = this.Lang;
-                            Setting.Default.Save();
+                                Process.Start(new ProcessStartInfo(Assembly.GetExecutingAssembly().Location));
+                                Application.Current.Shutdown();
 
+                            }
                         }
                 });
 

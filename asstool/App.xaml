@@ -26,6 +26,7 @@
             <Style x:Key="WindowStyle" TargetType="metro:MetroWindow">
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}"/>
                 <Setter Property="SaveWindowPosition" Value="True"/>
+                <Setter Property="ShowTitleBar" Value="False"/>
             </Style>
             
             <!-- #region menu -->

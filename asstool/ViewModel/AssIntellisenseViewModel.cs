@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Xceed.Wpf.Toolkit;
 
 namespace asstool.ViewModel
 {
     public class AssIntellisenseViewModel : BaseViewModel
     {
-        public List<string> CmdList { get; set; }
+        public List<string> Cmds { get; set; }
 
-        public Cmd Cmd { get; set; }
+        private string document;
+        public string Document { get { return document; } set { document = value; RaisePropertyChanged(); } }
 
         private int index;
         public int Index
@@ -20,13 +22,13 @@ namespace asstool.ViewModel
             get { return index; }
             set
             {
-                if (value >= 0 && value < CmdList.Count)
+                if (value >= 0 && value < Cmds.Count)
                 {
                     index = value;
                     RaisePropertyChanged("Index");
 
-                    Cmd = AssCmd.CmdDictionary[CmdList[index]];
-                    RaisePropertyChanged("Cmd");
+                    document = AssDocument.DocumentDictionary[Cmds[index]];
+                    RaisePropertyChanged("Document");
                 }
             }
         }
@@ -46,7 +48,7 @@ namespace asstool.ViewModel
             set { assCmdLeft = value; RaisePropertyChanged(); }
         }
 
-        private double assCmdTop = 100;
+        private double assCmdTop = 0;
         public double AssCmdTop
         {
             get { return assCmdTop; }
@@ -57,11 +59,19 @@ namespace asstool.ViewModel
 
         public AssIntellisenseViewModel()
         {
-            CmdList = AssCmd.CmdDictionary.Keys.ToList();
-            RaisePropertyChanged("CmdList");
+            try
+            {
+                Cmds = AssDocument.DocumentDictionary.Keys.ToList();
+                Cmds.Sort();
+            } 
+            catch(Exception)
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("Ass document file lost.");
+                Environment.Exit(-1);
+            }
+            RaisePropertyChanged("Cmds");
 
-            Cmd = AssCmd.CmdDictionary[CmdList[0]];
-            RaisePropertyChanged("Cmd");
+            this.Index = 0;
         }
     }
 }

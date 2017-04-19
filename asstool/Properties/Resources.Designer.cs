@@ -61,6 +61,15 @@ namespace asstool.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string btn_about {
+            get {
+                return ResourceManager.GetString("btn_about", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color.
         /// </summary>
         public static string menu_color {
@@ -97,7 +106,7 @@ namespace asstool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to change language {0}.
+        ///   Looks up a localized string similar to Do you want to change language to {0}.
         /// </summary>
         public static string msg_change_language_title {
             get {

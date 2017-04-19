@@ -1,0 +1,2 @@
+richtextbox for html
+see:http://blogs.u2u.be/diederik/post/2010/08/31/A-Rich-HTML-TextBlock-for-WPF.aspx

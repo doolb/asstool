@@ -1,47 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Xceed.Wpf.Toolkit;
+using Setting = asstool.Properties.Settings;
 
 namespace asstool.Model
 {
-    public class Cmd
+    public class AssDocument
     {
-        public string Name { get; set; }
+        public static Dictionary<string, string> DocumentDictionary = new Dictionary<string, string>();
 
-        public string Format { get; set; }
-
-        public string Example { get; set; }
-
-        public string Comment { get; set; }
-    }
-    public class AssCmd
-    {
-        public static Dictionary<string, Cmd> CmdDictionary = new Dictionary<string, Cmd>();
-
-        static AssCmd()
+        static AssDocument()
         {
-            CmdDictionary.Add("fs", new Cmd()
-            {
-                Format = "\\fs<size>",
-                Example = "\\fs50",
-                Name = "Font Size"
-            });
+            string name = string.Format("ass.{0}.txt", Setting.Default.lang);
+            string path = Path.Combine("ass", name);
 
-            CmdDictionary.Add("pos", new Cmd()
+            #region read ass document from file
+            string key;
+            StringBuilder sb = new StringBuilder();
+            int line=0;
+            using (StreamReader sr = new StreamReader(path))
             {
-                Format = "\\pos (<x>, <y>)",
-                Example = "\\pos(470, 260)",
-                Name = "Set position"
-            });
+                while(!sr.EndOfStream)
+                {
+                    // read key
+                    key = sr.ReadLine().TrimStart('\t', ' ').TrimEnd();
+                    line++;
+                    if (key.Length == 0) continue; // is empty line
+                    if (key[0] == ';') continue;  // is comment 
 
-            CmdDictionary.Add("move", new Cmd()
-            {
-                Format = "\\move (<x1>, <y1>, <x2>, <y2> [, <t1>, <t2>])",
-                Example = "\\move (100, 150, 300, 350)",
-                Name = "Movement"
-            });
+                    // get the '{'
+                    if (sr.ReadLine().Trim()[0] != '{')
+                    {
+                        MessageBox.Show(string.Format("ass document file error, key:[{0}] at line: {1}", key, line++));
+                        continue;
+                    }
+
+                    // read doc
+                    while(true)
+                    {
+                        if (sr.EndOfStream) break;
+                        string s = sr.ReadLine().TrimStart().TrimEnd();
+                        line++;
+                        if (s.Length == 0) continue; // is empty line
+                        if (s[0] == ';') continue;  // is comment 
+
+                        if (s[0] != '}')
+                        {
+                            sb.Append(s);
+                            continue;
+                        }
+                        else
+                        {
+                            DocumentDictionary.Add(key, sb.ToString());
+
+                            sb.Clear();
+                            break;
+                        }
+                    }
+                    
+                }
+            }
+            #endregion
+
         }
     }
 }
