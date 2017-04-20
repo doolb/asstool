@@ -88,8 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\AssCmd.cs" />
+    <Compile Include="Model\Ass.cs" />
     <Compile Include="Model\BaseCommand.cs" />
+    <Compile Include="Model\BrowserBehavior.cs" />
     <Compile Include="Properties\Resources.zh-TW.Designer.cs">
       <DependentUpon>Resources.zh-TW.resx</DependentUpon>
       <AutoGen>True</AutoGen>

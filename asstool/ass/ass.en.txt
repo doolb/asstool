@@ -1,6 +1,1001 @@
-	;key/	format/	example/		name/	comment
+;ass document format
+;powerby aegisub:http://docs.aegisub.org/3.2/ASS_Tags/
+;
+;key
+;document ( use html ) see bellow
+;{
+;<div>
+;	<h3 style="color:#00CFFF">Name</h3>
+;	<p  style="color:#1CE32E"><b>command format</b></p>
+;	<div>
+;		example<br>
+;	</div>
+;	<div>
+;		details<br>
+;	</div>
+;</div>
+;}
+
 	
 	
-fs/		\fs<size>/ \fs50/		Font Size/	The following text will use a size 10 font.
-pos/	\pos (<x>, <y>)/ \pos(470, 260)/	Set position/ Set the position of the line.
-move/	\move (<x1>, <y1>, <x2>, <y2> [, <t1>, <t2>])/ \move (100, 150, 300, 350)/	Movement/ When the line appears on screen, the subtitle is at (100,150). While the subtitle is displayed, it moves at constant speed such that it will arrive at point (300,350) at the same time it disappears.
+fs
+{
+<div>
+	<h3 style="color:#00CFFF">Font size</h3>
+	<p  style="color:#1CE32E"><b>\fs<i>&lt;size&gt;</i></b></p>
+	<p>\fs<i>&lt;10&gt;</i><br>
+	The following text will use a size <font size="10">10</font> font.</p>
+</div>
+
+}
+pos	
+{
+<div>
+	<h3 style="color:#00CFFF">Set position</h3>
+	<p  style="color:#1CE32E"><b>\pos(<i>&lt;X&gt;</i>,<i>&lt;Y&gt;</i>)</b></p>
+	<p>\pos(<i>&lt;470&gt;</i>,<i>&lt;260&gt;</i>)<br>
+	Set the position of the line.</p>
+</div>
+}
+
+
+move
+{
+<div>
+	<h3 style="color:#00CFFF">Movement</h3>
+	<p  style="color:#1CE32E">\move(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;)<br>
+	\move(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;,<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;)</p>
+	<div>
+		<p>\move(100,150,300,350)<br>
+		When the line appears on screen, the subtitle is at (100,150). While the
+		subtitle is displayed, it moves at constant speed such that it will arrive at
+		point (300,350) at the same time it disappears.</p>
+		<p>\move(100,150,300,350,500,1500)<br>
+		The line appears at (100,150). After the line has been displayed for half a
+		second (500 milliseconds) it begins moving towards (300,350) such that it will
+		arrive at the point a second and a half (1500 milliseconds) after the line
+		first appeared on screen.</p>
+		
+		
+		<pre>\move(100,150,300,350,500,1500)</pre>
+		<p>The line appears at (100,150). After the line has been displayed for half a
+		second (500 milliseconds) it begins moving towards (300,350) such that it will
+		arrive at the point a second and a half (1500 milliseconds) after the line
+		first appeared on screen.</p>
+	</div>
+	<div>
+				<p>The <code>\move</code> tag works similar to <a href="http://docs.aegisub.org/3.2/ASS_Tags/#setposition">`\pos`</a> in that it
+		positions the subtitle line, the difference is that <code>\move</code> makes the subtitle
+		move.</p>
+		
+		<p>The two versions of <code>\move</code> differ in that one makes the movement occur over
+		the entire duration of the subtitle, while on the other you specify the time
+		over which the movement occurs.</p>
+		
+		<p>The coordinates <em>x1</em>, <em>y1</em>, <em>x2</em> and <em>y2</em> are given in the script resolution
+		coordinate system, like <code>\pos</code>. The subtitle starts out at point (<em>x1</em>,<em>y1</em>)
+		and moves with constant speed so it ends up at (<em>x2</em>,<em>y2</em>).
+		<a href="http://docs.aegisub.org/3.2/ASS_Tags/#linealignment">Alignment</a> influences movement coordinates the same
+		way as it influences <code>\pos</code> coordinates.</p>
+		
+		<p>In the second version, the times <em>t1</em> and <em>t2</em> are given in milliseconds, ie.
+		one thousandth of a second, and are relative to the start time of the
+		subtitle. For example, a <em>t1</em> value of 1500 means that the movement begins 1.5
+		seconds (one and a half second) after the line has appeared on screen. When
+		you specify times for the movement, the position of the subtitle is as
+		follows:</p>
+		
+		<ol>
+		<li>Before <em>t1</em>, the subtitle is stationary at point (<em>x1</em>,<em>y1</em>).</li>
+		<li>Between <em>t1</em> and <em>t2</em>, the subtitle moves with constant speed from (<em>x1</em>,<em>y1</em>) to (<em>x2</em>,<em>y2</em>).</li>
+		<li>After <em>t2</em> the subtitle is stationary at point (<em>x2</em>,<em>y2</em>).</li>
+		</ol>
+		
+		<p>Note that it is legal to have <em>t1</em> and <em>t2</em> specify times greater than the
+		duration of the line, but it might not be very useful to do so. Specifying
+		both <em>t1</em> and <em>t2</em> as 0 (zero) is the same as using the first version of
+		<code>\move</code>, ie. the movement will occur from the start time of the line to the
+		end time of the line.</p>
+		
+		<p>There are some things <strong><code>\move</code> can not do</strong>:</p>
+		
+		<ul>
+		<li>Non-constant-speed movement is not possible. The movement can not, for
+		example, start out slow and end fast.</li>
+		<li>There can only be one positioning or movement tag in a line. Putting both a
+		<code>\pos</code> and a <code>\move</code> tag in a line will not work. It will also not work to
+		put two or more <code>\move</code> tags in a single line.</li>
+		</ul>
+		
+		<p>If you need to do do any of those two you will need to split the movement into
+		segments that are done on separate subtitle lines. (How to do this is outside
+		the scope of this page.)</p>
+	</div>
+</div>
+}
+
+
+i
+{
+<div>
+	<h3 style="color:#00CFFF">Italics</h3>
+	<p  style="color:#1CE32E"><b>\i1<br>\i0</b></p>
+	Switch <em>italics</em> text on or off. Use <b>\i1</b> to enable italics for the following
+	text and <b>\i0</b> to disable italics again.<p></p>
+</div>
+}
+
+
+b
+{
+<div>
+	<h3 style="color:#00CFFF">Bold</h3>
+	<p  style="color:#1CE32E"><b>\b1<br>\b0<br>\b<i>&lt;weight&gt;</i></b></p>
+	<p>I am {\b1}not[\b0} amused.<br>
+	The word “<b>not</b>” is written in boldface.</p>
+	<p>Switch <strong>boldface</strong> text on or off. Use <code>\b1</code> to enable boldface for the
+	following text and <code>\b0</code> to disable boldface again.</p>
+</div>
+}
+u
+{
+<div>
+	<h3 style="color:#00CFFF">Underline</h3>
+	<p  style="color:#1CE32E"><b>\u1<br>\u0</b></p>
+	<p>\pos(<i>&lt;470&gt;</i>,<i>&lt;260&gt;</i>)<br>
+	Switch <u>underlined</u> text on or off. Use <code>\u1</code> to enable underlining for
+	the following text and <code>\u0</code> to disable underlining again.</p>
+</div>
+}
+
+s	
+{
+<div>
+	<h3 style="color:#00CFFF">Strikeout</h3>
+	<p  style="color:#1CE32E"><b>\s1<br>\s0</b></p>
+	<p>Switch <s>striked out</s> text on or off. Use <code>\s1</code> to enable strikeout for
+	the following text and <code>\s0</code> to disable strikeout again.</p>
+</div>
+}
+bord
+{
+<div>
+	<h3 style="color:#00CFFF">Border size</h3>
+	<p  style="color:#1CE32E"><b>\bord<i>&lt;size&gt;</i></b></p>
+	<p>Change the width of the border around the text. Set the size to 0 (zero) to
+	disable the border entirely.</p>
+</div>
+}
+xbord
+{
+<div>
+	<h3 style="color:#00CFFF">Border size in X</h3>
+	<p  style="color:#1CE32E"><b>\xbord<i>&lt;size&gt;</i></b></p>
+	<p>Use the <code>\xbord</code> tags to set the border size in X and Y direction
+	separately. This can be useful for correcting the border size for anamorphic
+	rendering of subtitles.</p>
+</div>
+}
+ybord
+{
+<div>
+	<h3 style="color:#00CFFF">Border size in Y</h3>
+	<p  style="color:#1CE32E"><b>\ybord<i>&lt;size&gt;</i></b></p>
+	<p>Use the <code>\ybord</code> tags to set the border size in X and Y direction
+	separately. This can be useful for correcting the border size for anamorphic
+	rendering of subtitles.</p>
+</div>
+}
+shad
+{
+<div>
+	<h3 style="color:#00CFFF">Shadow distance</h3>
+	<p  style="color:#1CE32E"><b>\shad<i>&lt;depth&gt;</i></b></p>
+	<p>Set the distance from the text to position the shadow. Set the depth to 0
+	(zero) to disable shadow entirely. Works similar to <a href="http://docs.aegisub.org/3.2/ASS_Tags/#bordersize">\bord</a>.<p></p>
+	</p>
+</div>
+}
+xshad
+{
+<div>
+	<h3 style="color:#00CFFF">Shadow distance in X</h3>
+	<p  style="color:#1CE32E"><b>\xshad<i>&lt;depth&gt;</i></b></p>
+	<p>Set the distance from the text to position the shadow at, with X and Y
+	position set separately. Shadow is only disabled if both X and Y distance is
+	0.</p>
+
+	<p>Note that unlike \shad, you can set the distance negative with these tags to
+	position the shadow to the top or left of the text.</p>
+</div>
+}
+yshad
+{
+<div>
+	<h3 style="color:#00CFFF">Shadow distance in Y</h3>
+	<p  style="color:#1CE32E"><b>\yshad<i>&lt;depth&gt;</i></b></p>
+	<p>Set the distance from the text to position the shadow at, with X and Y
+	position set separately. Shadow is only disabled if both X and Y distance is
+	0.</p>
+
+	<p>Note that unlike \shad, you can set the distance negative with these tags to
+	position the shadow to the top or left of the text.</p>
+</div>
+}
+
+be
+{
+<div>
+	<h3 style="color:#00CFFF">Blur edges</h3>
+	<p  style="color:#1CE32E"><b>\be0<br>\be1<br>\be<i>&lt;strength&gt;</i></b></p>
+	<p>Be aware that this tag blurs the <em>edges</em> of the text, not everything. This
+means that if the text has a border (set with <a href="http://docs.aegisub.org/3.2/ASS_Tags/#borderwidth">\bord</a>) the
+border will be blurred, but if there is no border, the main text will be
+blurred instead.</p>
+</div>
+}
+blur
+{
+<div>
+	<h3 style="color:#00CFFF">Blur edges (Gaussian kernel)</h3>
+	<p  style="color:#1CE32E"><b>\blur<i>&lt;strength&gt;</i></b></p>
+	<p>
+		In general, this has the same function as the <a href="http://docs.aegisub.org/3.2/ASS_Tags/#bluredges">`\be`</a> tag, but
+uses a more advanced algorithm that looks better at high strengths. Unlike
+<code>\be</code>, the <em>strength</em> can be non-integer here. Set <em>strength</em> to 0 (zero) to
+disable the effect. Be careful, setting <em>strength</em> too high can take a lot of
+CPU time to render.
+	</p>
+</div>
+}
+
+fn
+{
+<div>
+	<h3 style="color:#00CFFF">div name</h3>
+	<p  style="color:#1CE32E"><b>\fn<i>&lt;name&gt;</i></b></p>
+	<p> <pre>{\fnArial}Arial and {\fnTimes New Roman}Times New Roman</pre>
+	<font font-family="Arial">Arial</font> and <font font-family="Times New Roman">Times New Roman</font>
+	</p>
+	<p>
+		Set the font face to use for the following text. There should be no space
+between <code>\fn</code> and the div name, and you should not put parentheses or similar
+around the font name either.<p></p>
+
+	</p>
+</div>
+}
+
+fscx
+{
+<div>
+	<h3 style="color:#00CFFF">Font scale in X</h3>
+	<p  style="color:#1CE32E"><b>\fscx<i>&lt;scale&gt;</i></b></p>
+	<div><pre>\fscx150</pre>
+		 <p>Make the text 50% wider than normal.</p>
+	</div>
+	<div>Adjust the size of the text in X (<code>\fscx</code>) direction. The
+	<em>scale</em> given is in percent, so 100 means "original size".
+	</div>
+</div>
+}
+
+fscy
+{
+<div>
+	<h3 style="color:#00CFFF">Font scale in Y</h3>
+	<p  style="color:#1CE32E"><b>\fscy<i>&lt;scale&gt;</i></b></p>
+	<div><pre>\fscy50</pre>
+		 <p>Make the text half height.</p>
+	</div>
+	<div>Adjust the size of the text in Y (<code>\fscy</code>) direction. The
+	<em>scale</em> given is in percent, so 100 means "original size".
+	</div>
+</div>
+}
+
+fsp
+{
+<div>
+	<h3 style="color:#00CFFF">Letter spacing</h3>
+	<p  style="color:#1CE32E"><b>\fsp<i>&lt;spacing&gt;</i></b></p>
+	<div>
+	</div>
+	<div>
+		Changes the spacing between the individual letters in the text. You can use
+this to spread the text more out visually. The <em>spacing</em> is given in script
+resolution pixels.
+<p>Spacing can be negative and can have decimals.</p>
+
+	</div>
+</div>
+}
+
+fr
+{
+<div>
+	<h3 style="color:#00CFFF">Text rotation in Z</h3>
+	<p  style="color:#1CE32E"><b>\fr<i>&lt;amount&gt;</i></b></p>
+	<div>
+		<pre>\t(\frz3600)</pre>
+		<p>Perform an animation where the text performs 10 full revolutions on the Z axis. Also see the <a href="http://docs.aegisub.org/3.2/ASS_Tags/#animatedtransform">\t</a> tag.</p>
+	</div>
+	<div>
+		The <code>\fr</code> tag is a shortcut for <code>\frz</code>.
+		<li>The <strong>Z axis</strong> runs perpendicular to the screen. Rotating on it (with
+positive values) causes the text to rotate in 2D, counterclockwise (as
+standard for degrees).</li>
+	</div>
+</div>
+}
+
+frx
+{
+<div>
+	<h3 style="color:#00CFFF">Text rotation in X</h3>
+	<p  style="color:#1CE32E"><b>\frx<i>&lt;amount&gt;</i></b></p>
+	<div>
+		<pre>\frx45</pre>
+		<p>Rotate the text 45 degrees on the X axis.</p>
+	</div>
+	<div>
+		<li>The <strong>X axis</strong> runs horizontally on the screen. Rotating on it (with
+positive values) causes an effect where the top of the text moves farther
+"into" the screen while the bottom moves "out" of the screen.</li>	
+	</div>
+</div>
+}
+fry
+{
+<div>
+	<h3 style="color:#00CFFF">Text rotation in Y</h3>
+	<p  style="color:#1CE32E"><b>\fry<i>&lt;amount&gt;</i></b></p>
+	<div>
+		<pre>\fry-45</pre>
+		<p>Rotate the text 45 degrees in opposite direction on the Y axis.</p>
+	</div>
+	<div>
+		<li>The <strong>Y axis</strong> runs vertically on the screen. Rotating on it (with positive
+values) causes the text to rotate so that the left moves "outside" the
+screen, when the right moves "into" the screen.</li>
+	</div>
+</div>
+}
+frz
+{
+<div>
+	<h3 style="color:#00CFFF">Text rotation in Z</h3>
+	<p  style="color:#1CE32E"><b>\frz<i>&lt;amount&gt;</i></b></p>
+	<div>
+		<pre>\frz-30<br>\frz330</pre>
+		<p>This is because 330 degrees is 30 degrees less than a full rotation of 360 degrees.</p>
+	</div>
+	<div>
+		<li>The <strong>Z axis</strong> runs perpendicular to the screen. Rotating on it (with
+positive values) causes the text to rotate in 2D, counterclockwise (as
+standard for degrees).</li>
+	</div>
+</div>
+}
+
+fax
+{
+<div>
+	<h3 style="color:#00CFFF">Text shearing in X</h3>
+	<p  style="color:#1CE32E"><b>\fax<i>&lt;factor&gt;</i></b></p>
+	<div>
+	</div>
+	<div>
+		<p>Perform a shearing (perspective distortion) transformation of the text. A
+<em>factor</em> of 0 (zero) means no distortion.</p>
+
+<p>Usually <em>factor</em> will be a small number; values outside the range -2 to 2 are
+unlikely to have desireable results.</p>
+
+<p>Shearing is performed after rotation, on the rotated coordinates. The
+coordinate system used for shearing is not affected by the <a href="http://docs.aegisub.org/3.2/ASS_Tags/#rotationorigin">rotation
+origin</a>.</p>
+	</div>
+</div>
+}
+
+fay
+{
+<div>
+	<h3 style="color:#00CFFF">Text shearing in Y</h3>
+	<p  style="color:#1CE32E"><b>\fay<i>&lt;factor&gt;</i></b></p>
+	<div>
+	</div>
+	<div>
+		<p>Perform a shearing (perspective distortion) transformation of the text. A
+<em>factor</em> of 0 (zero) means no distortion.</p>
+
+<p>Usually <em>factor</em> will be a small number; values outside the range -2 to 2 are
+unlikely to have desireable results.</p>
+
+<p>Shearing is performed after rotation, on the rotated coordinates. The
+coordinate system used for shearing is not affected by the <a href="http://docs.aegisub.org/3.2/ASS_Tags/#rotationorigin">rotation
+origin</a>.</p>
+	</div>
+</div>
+}
+fe
+{
+<div>
+	<h3 style="color:#00CFFF">Font encoding</h3>
+	<p  style="color:#1CE32E"><b>\fe<i>&lt;id&gt;</i></b></p>
+	<div>
+	</div>
+	<div>
+		Set the Windows font encoding used to select the font mapping table used to
+		translate Unicode codepoints to glyph indices in the font. For some fonts
+		without a Unicode mapping table this might be required to get text in certain
+		languages to work. For fonts that do have a Unicode mapping table, it might be
+		used to pick regional variations, such as picking the correct glyph for a Han
+		ideogram that is different in Simplified Chinese, Traditional Chinese,
+		Japanese and Korean.<p></p>
+		
+		<p>Some common font encoding IDs are:</p>
+		
+		<ul>
+			<li>0 - ANSI, Windows CP-1252 for Western-European languages.</li>
+			<li>1 - Default, depends on the configuration of the user's system, but also
+			allows the font sub-system to dynamically pick a different mapping table in
+			some circumstances.</li>
+			<li>2 - Symbol, codepoints in the 0-255 range are translated to per-font defined
+			symbol glyphs, this is used for fonts such as Wingdings.</li>
+			<li>128 - Shift-JIS, used for Japanese.</li>
+			<li>129 and 130, respectively Hangeul and Johab, two encoding schemes for Korean.</li>
+			<li>134 - GB2312, used for Simplified Chinese.</li>
+			<li>136 - BIG5, used for Traditional Chinese.</li>
+			<li>162 - Turkish.</li>
+			<li>163 - Vietnamese.</li>
+			<li>177 - Hebrew.</li>
+			<li>178 - Arabic.</li>
+		</ul>
+
+	</div>
+</div>
+}
+
+c
+{
+<div>
+	<h3 style="color:#00CFFF">Set color</h3>
+	<p  style="color:#1CE32E"><b>\c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\1c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\2c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\3c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\4c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;</b></p>
+	<div>
+	</div>
+	<div>
+		<p>Set the color of the following text. The <code>\c</code> tag is an abbreviation of <code>\1c</code>.</p>
+		
+		<ul>
+		<li><code>\1c</code> sets the primary fill color.</li>
+		<li><code>\2c</code> sets the secondary fill color. This is only used for pre-highlight in
+		standard karaoke.</li>
+		<li><code>\3c</code> sets the border color.</li>
+		<li><code>\4c</code> sets the shadow color.</li>
+		</ul>
+	</div>
+</div>
+}
+a
+{
+<div>
+	<h3 style="color:#00CFFF">Set alpha</h3>
+	<p  style="color:#1CE32E"><b>\alpha&amp;H<i>&lt;aa&gt;</i><br>
+		\1a&amp;H<i>&lt;aa&gt;</i><br>
+		\2a&amp;H<i>&lt;aa&gt;</i><br>
+		\3a&amp;H<i>&lt;aa&gt;</i><br>
+		\4a&amp;H<i>&lt;aa&gt;</i></b>
+	<div>
+		<pre>\alpha&amp;H80&amp;</pre>
+		<p>Set the alpha of all components to hexadecimal 80, decimal 128, making the
+			text 50% transparent in general.</p>
+			
+		<pre>\1a&amp;HFF&amp;</pre>
+		<p>Set the primary fill alpha to hexadecimal FF, decimal 255, making it invisible
+			and effectively leaving only the border and shadow.</p>
+	</div>
+	<div>
+		<p>Set the alpha (transparency) of the text.</p>
+		<ul>
+			<li><code>\alpha</code> sets the alpha of all components at once.</li>
+			<li><code>\1a</code> sets the primary fill alpha.</li>
+			<li><code>\2a</code> sets the secondary fill alpha. This is only used for pre-highlight in
+			standard karaoke.</li>
+			<li><code>\3a</code> sets the border alpha.</li>
+			<li><code>\4a</code> sets the shadow alpha.</li>
+		</ul>
+		<p>An alpha of 00 (zero) means opaque/fully visible, and an alpha of FF (ie. 255
+			in decimal) is fully transparent/invisible.</p>
+	</div>
+</div>
+}
+
+an
+{
+<div>
+	<h3 style="color:#00CFFF">Line alignment</h3>
+	<p  style="color:#1CE32E"><b>\an<i>&lt;pos&gt;</i></b></p>
+	<div>
+	</div>
+	<div>
+		
+		Specify the alignment of the line. The alignment specifies the position of the
+		line when no <a href="http://docs.aegisub.org/3.2/ASS_Tags/#setposition">position override</a> or
+		<a href="http://docs.aegisub.org/3.2/ASS_Tags/#movement">movement</a> is in effect, and otherwise specifies the
+		anchor point of positioning and rotation.<p></p>
+		
+		<p>The <code>\an</code> tag uses "numpad" values for the <em>pos</em>, ie. the alignment values
+		correspond to the positions of the digits on the numeric keypad on a regular
+		keyboard:</p>
+		
+		<ol>
+			<li>Bottom left</li>
+			<li>Bottom center</li>
+			<li>Bottom right</li>
+			<li>Middle left</li>
+			<li>Middle center</li>
+			<li>Middle right</li>
+			<li>Top left</li>
+			<li>Top center</li>
+			<li>Top right</li>
+		</ol>
+		
+	</div>
+</div>
+}
+
+
+k
+{
+<div>
+	<h3 style="color:#00CFFF">Karaoke effect</h3>
+	<p  style="color:#1CE32E"><b>\k<i>&lt;duration&gt;</i><br>
+		\K<i>&lt;duration&gt;</i><br>
+		\kf<i>&lt;duration&gt;</i><br>
+		\ko<i>&lt;duration&gt;</i></b></p>
+	<div>
+	</div>
+	<div>
+		<blockquote>
+		<p><em>Please note that these tags alone only create some very specific effects
+		and all other effects are created with a combination of multiple different
+		tags.</em></p>
+		</blockquote>
+		
+		<p>The <code>\k</code> family of tags mark up subtitles for karaoke effects by specifying
+		the duration of each syllable. You place a <code>\k</code> tag before each syllable in
+		the line.</p>
+		
+		<p>The <em>duration</em> is given in centiseconds, ie. a <em>duration</em> of 100 is equivalent
+		to 1 second. You generally don't enter <code>\k</code> tags manually but rather use
+		karaoke timing tools such as <a href="http://docs.aegisub.org/3.2/Tutorials/#karaoketiming">Aegisub's karaoke
+		mode</a>.</p>
+		
+		<p>The different <code>\k</code> tags create various effects:</p>
+		
+		<ul>
+			<li><code>\k</code>: Before highlight, the syllable is filled with the secondary color and
+			alpha. When the syllable starts, the fill is instantly changed to use
+			primary color and alpha.</li>
+			<li><code>\K</code> and <code>\kf</code>: These two are identical. Note that <code>\K</code> is an uppercase K
+			and is different from lowercase <code>\k</code>. The syllable fill starts out secondary
+			color, when the syllable starts, the fill changes from secondary to primary
+			with a sweep from left to right, so the sweep ends when the syllable time is
+			over.</li>
+			<li><code>\ko</code>: Similar to <code>\k</code>, except that before highlight, the border/outline of
+			the syllable is removed, and appears instantly when the syllable starts.</li>
+		</ul>
+		
+		<p><em>Note: There is an additional karaoke tag, <code>\kt</code>, which is very different from
+		the other ones. It is rarely useful and Aegisub does not support that tag, so
+		it is not documented.</em></p>
+		
+	</div>
+</div>
+}
+
+q
+{
+<div>
+	<h3 style="color:#00CFFF">Wrap style</h3>
+	<p  style="color:#1CE32E"><b>\q<i>&lt;style&gt;</i></b></p>
+	<div>
+	</div>
+	<div>
+		Determine how line breaking is applied to the subtitle line. The following
+		_style_s are available:<p></p>
+		
+		<ul>
+		<li>0: Smart wrapping, make each line approximately equally long, but top line
+		wider when equal width is impossible. Only <code>\N</code> forces line breaks.</li>
+		<li>1: End-of-line wrapping, fill as much text in a line as possible, then break
+		to next line. Only <code>\N</code> forces line breaks.</li>
+		<li>2: No word wrapping, wide lines will extend beyound the edges of the screen.
+		Both <code>\n</code> and <code>\N</code> force line breaks.</li>
+		<li>3: Smart wrapping, similar to style 0, but bottom lines are made wider.</li>
+		</ul>
+
+	</div>
+</div>
+}
+
+r
+{
+<div>
+	<h3 style="color:#00CFFF">Reset style</h3>
+	<p  style="color:#1CE32E"><b>\r<br>\r<i>&lt;style&gt;</i></b></p>
+	<div>
+		<pre>-Hey\N{\rAlternate}-Huh?\N{\r}-Who are you?</pre>
+		
+		<p>Assuming the current line style is “Default”, this has first “Hey” in the
+		Default style, then follows on next line “Huh?” in the style “Alternate”, and
+		on the third line the style is reset to “Default” for the “Who are you?”
+		text.</p>
+	</div>
+	<div>
+				
+		Reset the style. This cancels all style overrides in effect, including
+		<a href="http://docs.aegisub.org/3.2/ASS_Tags/#animatedtransform">animations</a>, for all following text.<p></p>
+		
+		<p>The first form that does not specify a <em>style</em> will reset to the style defined
+		for the entire line, while the second form, that specifies the name of a
+		<em>style</em>, will reset the style to that specific style.</p>		
+	</div>
+</div>
+}
+
+org
+{
+<div>
+	<h3 style="color:#00CFFF">Rotation origin</h3>
+	<p  style="color:#1CE32E"><b>\org(<i>&lt;X&gt;</i>,<i>&lt;Y&gt;</i>)</b></p>
+	<div>
+		<pre>\org(320,240)</pre>
+		<p>Fix the rotation origin at point (320,240).</p>
+		
+		<pre>\org(10000,0)</pre>
+		<p>Placing the rotation origin at a far away point allows you to use slight
+		<code>\frz</code> rotations to produce “jumping” effects; the text will move up or down
+		without seeming to rotate.</p>
+	</div>
+	<div>
+				
+		Set the origin point used for <a href="http://docs.aegisub.org/3.2/ASS_Tags/#textrotation">rotation</a>. This
+		affects all rotations of the line. The <em>X</em> and <em>Y</em> coordinates are given in
+		integer script resolution pixels.<p></p>
+		
+		<p>When there is no <code>\org</code> tag in a line, the rotation origin is implicitly the
+		same as the <a href="http://docs.aegisub.org/3.2/ASS_Tags/#setposition">position anchor point</a>. This means that
+		the rotation origin will move if the line moves and there is no origin set
+		with <code>\org</code>. Note that you can <em>not</em> animate the <code>\org</code> tag, you are limited
+		to a fixed origin if you use it.</p>
+		
+		<p>If the rotation origin is placed on the vanishing point in a 3D scene, 3D
+		rotations of subtitle line will produce the correct perspective to match the
+		scene.</p>
+		
+		<p>It's perfectly possible (and occasionally useful) to place the origin point
+		far outside the actual image; if it is sufficiently far away, doing
+		appropriately calculated small rotations will seem to move the text along a
+		straight (or almost straight) line through the image. This is somewhat hard to
+		control, but can be used to work around format limitations with \move, such as
+		the inability to do accelerated moves or several moves per line.</p>
+		
+		<p>There can be at most one <code>\org</code> tag in a single line, if you put more than one
+		in a single line, only the first is used.</p>
+
+	</div>
+</div>
+}
+
+fad
+{
+<div>
+	<h3 style="color:#00CFFF">Fade</h3>
+	<p  style="color:#1CE32E"><b>\fad(<i>&lt;fadein&gt;</i>,<i>&lt;fadeout&gt;</i>)</b></p>
+	<div>
+		<pre>\fad(1200,250)</pre>
+		<p>Fade in the line in the first 1.2 seconds it is to be displayed, and fade it
+		out for the last one quarter second it is displayed.</p>
+	</div>
+	<div>
+				
+		Produce a fade-in and fade-out effect. The <em>fadein</em> and <em>fadeout</em> times are
+		given in milliseconds, ie. 1000 means one second. You can specify <em>fadein</em> or
+		<em>fadeout</em> as 0 (zero) to not have any fade effect on that end.<p></p>
+		
+		<p>Adding a fade effect does not extend the duration of the line, rather the
+		start or end of the line's display time is used for the fade effect. For this
+		reason, you should be careful that <em>fadein</em>+<em>fadeout</em> is not greater than the
+		duration of the line. For example, for a line displayed for 4 seconds, the sum
+		of <em>fadein</em>+<em>fadeout</em> should not be greater than 4000.</p>
+		
+	</div>
+</div>
+}
+
+fade
+{
+<div>
+	<h3 style="color:#00CFFF">Fade (complex)</h3>
+	<p  style="color:#1CE32E"><b>\fade(<i>&lt;a1</i>&gt;,<i>&lt;a2</i>&gt;,<i>&lt;a3</i>&gt;,<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;,<i>&lt;t3</i>&gt;,<i>&lt;t4</i>&gt;)</b></p>
+	<div>
+		<pre>\fade(255,32,224,0,500,2000,2200)</pre>
+		
+		<p>Starts invisible, fades to almost totally opaque, then fades to almost totally
+		invisible. First fade starts when the line starts and lasts 500 milliseconds.
+		Second fade starts 1500 milliseconds later, and lasts 200 milliseconds.</p>
+	</div>
+	<div>
+		Perform a five-part fade using three alpha values <em>a1</em>, <em>a2</em> and <em>a3</em> and four
+		times <em>t1</em>, <em>t2</em>, <em>t3</em> and <em>t4</em>.<p></p>
+		
+		<p>The alpha values are given in <em>decimal</em> and are between 0 and 255, with 0
+		being fully visible and 255 being invisible. The time values are given in
+		milliseconds after the start of the line. All seven parameters are required.
+		(For most common fade effects the <code>[[\fad|ASS_Tags#fade]]</code> tag works fine.)</p>
+		
+		<ul>
+		<li>Before <em>t1</em>, the line has alpha <em>a1</em>.</li>
+		<li>Between <em>t1</em> and <em>t2</em> the line fades from alpha <em>a1</em> to alpha <em>a2</em>.</li>
+		<li>Between <em>t2</em> and <em>t3</em> the line has alpha <em>a2</em> constantly.</li>
+		<li>Between <em>t3</em> and <em>t4</em> the line fades from alpha <em>a2</em> to alpha <em>a3</em>.</li>
+		<li>After <em>t4</em> the line has alpha <em>a3</em>.</li>
+		</ul>
+
+	</div>
+</div>
+}
+
+t
+{
+<div>
+	<h3 style="color:#00CFFF">Animated transform</h3>
+	<p  style="color:#1CE32E"><b>\t(<i>&lt;style modifiers&gt;</i>)<br>
+		\t(<i>&lt;accel&gt;</i>,<i>&lt;style modifiers&gt;</i>)<br>
+		\t(<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;,<i>&lt;style modifiers&gt;</i>)<br>
+		\t(<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;,<i>&lt;accel&gt;</i>,<i>&lt;style modifiers&gt;</i>)</b></p>
+	<div>
+		example<br>
+		<pre>{\1c&amp;HFF0000&amp;\t(\1c&amp;H0000FF&amp;)}Hello!</pre>
+		<p>The text starts out blue, but fades towards red so it is completely red when the line ends.</p>
+		
+		<pre>{\an5\t(0,5000,\frz3600)}Wheee</pre>
+		<p>Makes the text rotate 10 times, counterclockwise, lasting for 5 seconds.</p>
+		
+		<pre>{\an5\t(0,5000,0.5,\frz3600)}Wheee</pre>
+		<p>Same as above, but it will start fast and slow down, still doing the 10 rotations in 5 seconds.</p>
+		
+		<pre>{\an5\fscx0\fscy0\t(0,500,\fscx100\fscy100)}Boo!</pre>
+		<p>Text starts at zero size, i.e. invisible, then grows to 100% size in both X and Y direction.</p>
+	</div>
+	<div>
+		details<br>
+		<p>Perform a gradual, animated transformation from one style to another. The
+		<em>style modifiers</em> are other override tags as specified in this reference. Only
+		a limited set of the override tags are animateable with <code>\t</code>:</p>
+		
+		<table>
+		<thead>
+			<tr>
+			<th>Font</th>
+			<th>Geometry</th>
+			<th>Other effects</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			<td>\fs</td>
+			<td>\fscx</td>
+			<td>\bord</td>
+			</tr>
+			<tr>
+			<td>\fsp</td>
+			<td>\fscy</td>
+			<td>\xbord</td>
+			</tr>
+			<tr>
+			<td>\c</td>
+			<td>\frx</td>
+			<td>\ybord</td>
+			</tr>
+			<tr>
+			<td>\1c</td>
+			<td>\fry</td>
+			<td>\shad</td>
+			</tr>
+			<tr>
+			<td>\2c</td>
+			<td>\frz</td>
+			<td>\xshad</td>
+			</tr>
+			<tr>
+			<td>\3c</td>
+			<td>\fr</td>
+			<td>\yshad</td>
+			</tr>
+			<tr>
+			<td>\4c</td>
+			<td>\fax</td>
+			<td>\clip</td>
+			</tr>
+			<tr>
+			<td>\alpha</td>
+			<td>\fay</td>
+			<td>\iclip</td>
+			</tr>
+			<tr>
+			<td>\1a</td>
+			<td>&nbsp;</td>
+			<td>\be</td>
+			</tr>
+			<tr>
+			<td>\2a</td>
+			<td>&nbsp;</td>
+			<td>\blur</td>
+			</tr>
+			<tr>
+			<td>\3a</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+			<tr>
+			<td>\4a</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		</table>
+		
+		<p><em>Note: For <code>\clip</code> and <code>\iclip</code>, only the rectangle versions can be animated. The
+		vector drawing versions cannot be animated.</em></p>
+		
+		<p><em>Note: Mixing <code>\clip</code> and <code>\iclip</code> in <code>\t</code> tags has undesireable results.</em></p>
+		
+		<p>The <em>t1</em> and <em>t2</em> parameters specify the time interval to perform the
+		transformation over. In the versions without <em>t1</em> and <em>t2</em> the transformation
+		is performed over the entire duration of the line. The times are given in
+		milliseconds and are relative to the start time of the line. (For the rest of
+		the description of <code>\t</code>, <em>t1</em> and <em>t2</em> are assumed to be specified, or
+		implicitly be respectively 0 and the duration of the line.)</p>
+		
+		<p>The <em>accel</em> parameter can be used to make the animation non-linear and instead
+		follow an exponential curve. An <em>accel</em> parameter of 1 (one) causes the
+		animation speed to be linear. A value bewteen 0 and 1 causes the animation to
+		start fast and end slow. A value greater than 1 causes the animation to start
+		slow and end fast. (For the mathematically inclined, the function is <em>y</em> = <em>x</em>
+		with <em>x</em> ∈ [0;1] = (<em>t</em>-<em>t1</em>)/(<em>t2</em>-<em>t1</em>), <em>t</em> being the current time.)</p>
+		
+		<p>Before <em>t1</em>, the style is as all tags before the <code>\t</code> tag specify. After <em>t2</em>
+		the style is as all tags before the <code>\t</code> tag, and further overridden by the
+		given <em>style overrides</em>. Between <em>t1</em> and <em>t2</em> the style is gradually animated
+		between those two points, following the acceleration function described above.</p>
+
+	</div>
+</div>
+}
+
+clip
+{
+<div>
+	<h3 style="color:#00CFFF">Clip (rectangle)</h3>
+	<p  style="color:#1CE32E"><b>\clip(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;)<br>
+		\iclip(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;)</b></p>
+	<div>
+		example<br>
+		<pre>\clip(0,0,320,240)</pre>
+		<p>Assuming 640x480 script resolution, only the part of the line within the top
+		left quadrant is visible.</p>
+		
+		<pre>\iclip(0,0,320,240)</pre>
+		<p>Similar to above, but instead the part of the line within the top left
+		quadrant is hidden.</p>
+		
+	</div>
+	<div>
+		details<br>
+		<p>Define a rectangle to clip the line, only the part of the line that is inside
+		the rectangle is visible. The <code>\iclip</code> tag has the opposite effect, it defines
+		a rectangle where the line is not shown.</p>
+		
+		<p>The <em>x1</em>, <em>y1</em>, <em>x2</em> and <em>y2</em> coordinates are given in script resolution
+		pixels and are relative to the top-left corner of the video. The coordinates
+		must be integers, there is no possibility to use non-integer coordinates.
+		(Increasing the script resolution will not increase the precision, the
+		clipping always happens on video pixel boundaries.)</p>
+		
+	</div>
+	
+<div>
+	<h3 style="color:#00CFFF">Clip (vector drawing)</h3>
+	<p  style="color:#1CE32E"><b>\clip(<i>&lt;drawing commands&gt;</i>)<br>
+		\clip(<i>&lt;scale&gt;</i>,<i>&lt;drawing commands&gt;</i>)<br>
+		\iclip(<i>&lt;drawing commands&gt;</i>)<br>
+		\iclip(<i>&lt;scale&gt;</i>,<i>&lt;drawing commands&gt;</i>)</b></p>
+	<div>
+		example<br>
+		<pre>\clip(1,m 50 0 b 100 0 100 100 50 100 b 0 100 0 0 50 0)</pre>
+		<p>Only show the portion of the line within the defined pseudo-circle.</p>
+	</div>
+	<div>
+		details<br>
+		<p>Use the shape defined by a vector drawing to selectively display (<code>\clip</code>) or
+		hide (<code>\iclip</code>) parts of the line.</p>
+		
+		<p>The <em>drawing commands</em> are drawing commands as those used with the <code>\p</code> tag,
+		the coordinates are given in script resolution pixels and are relative to the
+		top left corner of the video.</p>
+		
+		<p>If the <em>scale</em> is not specified it is assumed to be 1 (one), meaning that
+		coordinates correspond directly to pixels. The <em>scale</em> works the same way as
+		the <em>scale</em> for <code>\p</code> drawings.</p>
+		
+		<p>Unlike the rectangular clip, the vector drawing clip can <em>not</em> be animated
+		with <code>\t</code>. If you need to animate a vector drawing clip, you must create
+		multiple similar subtitle lines with each their own "frame" of the clipping
+		animation.</p>
+	</div>
+</div>
+</div>
+}
+p
+{
+<div>
+	<h3 style="color:#00CFFF">Drawing tags</h3>
+	<p  style="color:#1CE32E"><b>\p&lt;0/1/..&gt; - Toggle drawing mode</b></p>
+	<div>
+		example<br>
+		<pre>\p1</pre>
+		<p>(Enables drawing with normal coordinates)</p>
+		
+		<pre>\p0</pre>
+		<p>(Disables drawing)</p>
+		
+		<pre>\p2</pre>
+		<p>(Enables drawing, and resolution is doubled. So drawing to 200,200 will
+		actually draw to 100,100)</p>
+		
+		<pre>\p4</pre>
+		<p>(Enables drawing, and resolution is 8x larger (2^(4-1)). So drawing to 400,400
+		will actually draw to 50,50)</p>
+
+	</div>
+	<div>
+		details<br>
+		
+		<p>Setting this tag to 1 or above enables drawing mode. Text after this override
+		block will then be interpreted as drawing instructions, and not as actually
+		visible text. Setting this to zero disables drawing mode, restoring normal
+		behavior. When turning on, the value might be any integer larger than zero,
+		and will be interpreted as the scale, in 2^(value-1) mode. This is done to
+		allow sub-pixel accuracy.
+		e.g.:</p>
+	</div>
+</div>
+}
+pbo
+{
+<div>
+	<h3 style="color:#00CFFF">Baseline offset</h3>
+	<p  style="color:#1CE32E"><b>\pbo<y> - Baseline offset</y></b></p>
+	<div>
+		example<br>
+		<pre>\pbo-50</pre>
+		<p>(Draws everything 50 pixels above specified)</p>
+		
+		<pre>\pbo100</pre>
+		<p>(Draws everything 100 pixels below specified)</p>
+	</div>
+	<div>
+		details<br><p>Defines baseline offset for drawing. This is basically an Y offset to all
+		coordinates.
+		e.g.:</p>
+	</div>
+</div>
+}

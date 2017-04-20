@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:model="clr-namespace:asstool.Model"
+             xmlns:u2u="clr-namespace:Microsoft.Windows.Controls;assembly=U2UConsult.RichHtmlTextBlock"                   
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -67,6 +69,8 @@
             </Style>
 
             <!-- #endregion -->
+            
+            <u2u:HtmlFormatter x:Key="HtmlFormatter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

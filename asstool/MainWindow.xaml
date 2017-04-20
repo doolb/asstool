@@ -2,6 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:u2u="clr-namespace:Microsoft.Windows.Controls;assembly=U2UConsult.RichHtmlTextBlock"
+        xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit"             
+        xmlns:model="clr-namespace:asstool.Model"                   
         xmlns:m="clr-namespace:asstool.View"
         xmlns:p="clr-namespace:asstool.Properties"                   
         Title="AssTool" Height="350" Width="525"
@@ -50,20 +53,24 @@
                          TextWrapping="Wrap"/>
             </ScrollViewer>
 
-            <Canvas Grid.Row="1" Panel.ZIndex="1">
+            <Canvas Panel.ZIndex="1">
                 <m:AssIntellisense DataContext="{Binding AssCmdVM}"
                                Canvas.Left="{Binding AssCmdLeft}"
                                Canvas.Top ="{Binding AssCmdTop}"/>
             </Canvas>
 
-            <Grid Grid.Row="1"
-                  Name="rtbContain">
-                <RichTextBox>
-                    <FlowDocument PageWidth="{Binding Path=ActualWidth, ElementName=rtbContain,Mode=OneWay}"
-                             />     
-                </RichTextBox>
-            </Grid>
-            
+            <WebBrowser  model:BrowserBehavior.Html = "{Binding AssCode}"
+                         Grid.Row="1"/>
+
+            <!--
+            <ScrollViewer Grid.Row="1">    
+                
+                <u2u:RichTextBox Text="{Binding AssCode}"
+                                 FontSize="18"
+                                 TextFormatter="{StaticResource HtmlFormatter}"
+                                 IsReadOnly="False"/>
+            </ScrollViewer>
+            -->
         </Grid>
     </Grid>
 </metro:MetroWindow>

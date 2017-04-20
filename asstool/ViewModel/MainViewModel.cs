@@ -28,13 +28,27 @@ namespace asstool.ViewModel
 
         #region simple property
 
-        private string orgAssCode = "test";
+        private string orgAssCode;
         public  string OrgAssCode
         {
             get { return orgAssCode; }
             set
             {
                 orgAssCode = value;
+                RaisePropertyChanged();
+
+                // convert to html code
+                AssCode = AssVisual.AssToHtml(value);
+            }
+        }
+
+        private string assCode;
+        public  string AssCode
+        {
+            get { return assCode; }
+            set
+            {
+                assCode = value;
                 RaisePropertyChanged();
             }
         }
@@ -64,6 +78,7 @@ namespace asstool.ViewModel
 
             AssCmdVM = new AssIntellisenseViewModel();
 
+            AssCode = AssVisual.HtmlStyle;
         }
     }
 }

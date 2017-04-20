@@ -33,7 +33,8 @@ namespace asstool
 
             set_theme_and_accent();
 
-            MainViewModel.Instance.AssCmdVM.Show = Visibility.Visible;
+            //MainViewModel.Instance.AssCmdVM.Show = Visibility.Visible;
+            //MainViewModel.Instance.AssCmdVM.Input = "b";
         }
 
         void set_theme_and_accent()

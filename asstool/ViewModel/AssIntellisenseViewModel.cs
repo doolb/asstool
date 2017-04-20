@@ -39,6 +39,20 @@ namespace asstool.ViewModel
             get { return show; }
             set { show = value; RaisePropertyChanged(); }
         }
+
+        private string input;
+        public  string Input
+        {
+            get { return input; }
+            set
+            {
+                input = value;
+                Cmds = AssDocument.Match(value);
+                RaisePropertyChanged("Cmds");
+                index = 0;
+                RaisePropertyChanged("Index");
+            }
+        }
         
         #region ass intellisense position
         private double assCmdLeft = 100;
