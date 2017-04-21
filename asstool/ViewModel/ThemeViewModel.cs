@@ -128,7 +128,7 @@ namespace asstool.ViewModel
                                 Setting.Default.lang = this.Lang;
                                 Setting.Default.Save();
 
-                                Process.Start(new ProcessStartInfo(Assembly.GetExecutingAssembly().Location));
+                                Process.Start(new ProcessStartInfo(Assembly.GetExecutingAssembly().Location, this.Lang));
                                 Application.Current.Shutdown();
 
                             }

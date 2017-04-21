@@ -54,8 +54,14 @@ namespace asstool
         {
             MainViewModel.Instance.OrgIndex = (sender as TextBox).SelectionStart;
 
-            if (e.Key == Key.System)
+
+            if (e.Key == Key.Back && MainViewModel.Instance.AssCmdVM.Input != "")
                 MainViewModel.Instance.AssCmdVM.Show = Visibility.Visible;
+        }
+
+        private void MetroWindow_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            MainViewModel.Instance.AssCmdVM.Show = Visibility.Hidden;
         }
 
 

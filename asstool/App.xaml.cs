@@ -20,14 +20,25 @@ namespace asstool
             if (Setting.Default.is_run_first)
                 run_first();
 
+            // get command line
+            string[] cmd = Environment.GetCommandLineArgs();
+
             // set language
             // resources must be set public
             /* 
              * localization
              * refer:https://www.tutorialspoint.com/wpf/wpf_localization.htm
              */
+            if (cmd.Count() > 1)
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture =
+                new System.Globalization.CultureInfo(cmd[1]);
+            }
+            else
             System.Threading.Thread.CurrentThread.CurrentUICulture =
                 new System.Globalization.CultureInfo(Setting.Default.lang);
+
+            
         }
 
         void run_first()

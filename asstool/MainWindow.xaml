@@ -10,7 +10,8 @@
         xmlns:p="clr-namespace:asstool.Properties"                   
         Title="AssTool" Height="650" Width="525"
         ShowTitleBar="False"
-        Style="{StaticResource WindowStyle}">
+        Style="{StaticResource WindowStyle}"
+        MouseUp="MetroWindow_MouseUp">
     
     <Grid Margin="5">
         <!--#region grid row and column define--> 
@@ -52,13 +53,13 @@
 
             <TextBox Text="{Binding OrgAssCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                      TextWrapping="Wrap"
-                     KeyDown="TextBox_KeyDown"
+                     PreviewKeyDown="TextBox_KeyDown"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      Grid.Row="0"/>
 
 
 
-            <Canvas Panel.ZIndex="1">
+            <Canvas Panel.ZIndex="1" Grid.Row="1">
                 <m:AssIntellisense DataContext="{Binding AssCmdVM}"
                                Canvas.Left="{Binding AssCmdLeft}"
                                Canvas.Top ="{Binding AssCmdTop}"/>

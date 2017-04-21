@@ -50,7 +50,7 @@ namespace asstool.ViewModel
                 if(Cmds.Count == 0)
                 {
                     this.Show = Visibility.Hidden;
-                    input = "";
+                    //input = "";
                     return;
                 }
 
