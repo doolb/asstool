@@ -71,7 +71,6 @@ namespace asstool
         {
             MainViewModel.Instance.OrgIndex = (sender as TextBox).SelectionStart;
 
-
             if (e.Key == Key.Back && MainViewModel.Instance.AssCmdVM.Input != "")
                 MainViewModel.Instance.AssCmdVM.Show = Visibility.Visible;
         }
@@ -85,15 +84,18 @@ namespace asstool
 
         public void OnUP(object sender, HotkeyEventArgs e)
         {
+            if (MainViewModel.Instance.AssCmdVM.Show == Visibility.Hidden) return;
             MainViewModel.Instance.AssCmdVM.Index--;
         }
 
         public void OnDown(object sender, HotkeyEventArgs e)
         {
+            if (MainViewModel.Instance.AssCmdVM.Show == Visibility.Hidden) return;
             MainViewModel.Instance.AssCmdVM.Index++;
         }
         public void OnSelect(object sender, HotkeyEventArgs e)
         {
+            if (MainViewModel.Instance.AssCmdVM.Show == Visibility.Hidden) return;
 
             string org = MainViewModel.Instance.OrgAssCode;
             string head = org.Substring(0, input.SelectionStart - MainViewModel.Instance.AssCmdVM.Input.Length);

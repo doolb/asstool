@@ -23,7 +23,8 @@
                  SelectedIndex="{Binding Index}"
                  Grid.Column="0"
                  BorderBrush="{DynamicResource AccentBaseColorBrush}"
-                 BorderThickness="1"/>
+                 BorderThickness="1"
+                 SelectionChanged="ListBox_SelectionChanged"/>
 
         <ScrollViewer Grid.Column="1" Focusable="False">
             <u2u:RichTextBox 
