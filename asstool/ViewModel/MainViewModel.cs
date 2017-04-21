@@ -31,9 +31,20 @@ namespace asstool.ViewModel
         private int orgIndex;
         public int OrgIndex { 
             get { return orgIndex; } 
-            set { orgIndex = value;
-            if (value <= key_start) 
+            set { orgIndex = value > 0 ? value : 0;
+            if (orgIndex <= key_start) 
                 AssCmdVM.Show = Visibility.Hidden;
+            try
+            {
+                ass_assistx();
+
+                // convert to html code
+                AssCode = AssVisual.AssToHtml(orgAssCode);
+            }
+            catch (Exception)
+            {
+
+            }
             } 
         }
 

@@ -9,6 +9,7 @@
              Height="210" Width="400"
              d:DesignHeight="300" d:DesignWidth="300"
              Visibility="{Binding Show}">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

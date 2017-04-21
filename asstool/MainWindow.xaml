@@ -12,7 +12,6 @@
         ShowTitleBar="False"
         Style="{StaticResource WindowStyle}"
         MouseUp="MetroWindow_MouseUp">
-    
     <Grid Margin="5">
         <!--#region grid row and column define--> 
         <Grid.RowDefinitions>
@@ -55,14 +54,16 @@
                      TextWrapping="Wrap"
                      PreviewKeyDown="TextBox_KeyDown"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     Grid.Row="0"/>
+                     Grid.Row="0"
+                     Name="input"/>
 
 
 
             <Canvas Panel.ZIndex="1" Grid.Row="1">
                 <m:AssIntellisense DataContext="{Binding AssCmdVM}"
                                Canvas.Left="{Binding AssCmdLeft}"
-                               Canvas.Top ="{Binding AssCmdTop}"/>
+                               Canvas.Top ="{Binding AssCmdTop}"
+                                   IsHitTestVisible="True"/>
             </Canvas>
 
             <cef:ChromiumWebBrowser Grid.Row="1"
