@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:u2u="clr-namespace:Microsoft.Windows.Controls;assembly=U2UConsult.RichHtmlTextBlock"
-        xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit"             
+        xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit"                   
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:model="clr-namespace:asstool.Model"                   
         xmlns:m="clr-namespace:asstool.View"
         xmlns:p="clr-namespace:asstool.Properties"                   
-        Title="AssTool" Height="350" Width="525"
+        Title="AssTool" Height="650" Width="525"
         ShowTitleBar="False"
         Style="{StaticResource WindowStyle}">
     
@@ -47,11 +48,15 @@
                 <RowDefinition Height="*" MinHeight="100"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            
-            <ScrollViewer Grid.Row="0">
-                <TextBox Text="{Binding OrgAssCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                         TextWrapping="Wrap"/>
-            </ScrollViewer>
+
+
+            <TextBox Text="{Binding OrgAssCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                     TextWrapping="Wrap"
+                     KeyDown="TextBox_KeyDown"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Grid.Row="0"/>
+
+
 
             <Canvas Panel.ZIndex="1">
                 <m:AssIntellisense DataContext="{Binding AssCmdVM}"
@@ -59,17 +64,16 @@
                                Canvas.Top ="{Binding AssCmdTop}"/>
             </Canvas>
 
-            <WebBrowser  model:BrowserBehavior.Html = "{Binding AssCode}"
-                         Grid.Row="1"/>
-
+            <cef:ChromiumWebBrowser Grid.Row="1"
+                                    model:BrowserBehavior.Html="{Binding AssCode}"/>
             <!--
-            <ScrollViewer Grid.Row="1">    
-                
-                <u2u:RichTextBox Text="{Binding AssCode}"
+            <u2u:RichTextBox Text="{Binding AssCode}"
                                  FontSize="18"
+                             Grid.Row="1"
                                  TextFormatter="{StaticResource HtmlFormatter}"
-                                 IsReadOnly="False"/>
-            </ScrollViewer>
+                                 IsReadOnly="False"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            
             -->
         </Grid>
     </Grid>

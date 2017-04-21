@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Xceed.Wpf.Toolkit;
+using System.Windows;
 using Setting = asstool.Properties.Settings;
 
 namespace asstool.Model
@@ -67,11 +67,17 @@ namespace asstool.Model
             }
             #endregion
 
+            AllKey = DocumentDictionary.Keys.ToList();
+            AllKey.Sort();
         }
+
+        private static List<string> AllKey;
 
         public static List<string> Match(string pattern)
         {
-            if (pattern == null || pattern == "") return null;
+            if (pattern == null) return null;
+
+            if (pattern == "") return AllKey;
 
             // get match key            
             IEnumerable<string> match_keys = DocumentDictionary.Keys.Where(
@@ -83,6 +89,7 @@ namespace asstool.Model
                 list.Add(key);
             }
 
+            list.Sort();
             return list;
         }
     }

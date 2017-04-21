@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Xceed.Wpf.Toolkit;
 
 namespace asstool.ViewModel
 {
@@ -48,9 +47,15 @@ namespace asstool.ViewModel
             {
                 input = value;
                 Cmds = AssDocument.Match(value);
+                if(Cmds.Count == 0)
+                {
+                    this.Show = Visibility.Hidden;
+                    input = "";
+                    return;
+                }
+
                 RaisePropertyChanged("Cmds");
-                index = 0;
-                RaisePropertyChanged("Index");
+                Index = 0;
             }
         }
         
@@ -80,7 +85,7 @@ namespace asstool.ViewModel
             } 
             catch(Exception)
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("Ass document file lost.");
+                MessageBox.Show("Ass document file lost.");
                 Environment.Exit(-1);
             }
             RaisePropertyChanged("Cmds");

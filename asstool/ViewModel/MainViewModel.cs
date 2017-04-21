@@ -28,6 +28,15 @@ namespace asstool.ViewModel
 
         #region simple property
 
+        private int orgIndex;
+        public int OrgIndex { 
+            get { return orgIndex; } 
+            set { orgIndex = value;
+            if (value <= key_start) 
+                AssCmdVM.Show = Visibility.Hidden;
+            } 
+        }
+
         private string orgAssCode;
         public  string OrgAssCode
         {
@@ -37,8 +46,17 @@ namespace asstool.ViewModel
                 orgAssCode = value;
                 RaisePropertyChanged();
 
-                // convert to html code
-                AssCode = AssVisual.AssToHtml(value);
+                try
+                {
+                    ass_assistx();
+
+                    // convert to html code
+                    AssCode = AssVisual.AssToHtml(value);
+                }
+                catch(Exception)
+                {
+
+                }
             }
         }
 
@@ -80,5 +98,25 @@ namespace asstool.ViewModel
 
             AssCode = AssVisual.HtmlStyle;
         }
+
+        #region function
+        int key_start;
+        void ass_assistx()
+        {
+            if(AssCmdVM.Show == Visibility.Visible)
+            {
+                string key = orgAssCode.Substring(key_start+1, orgAssCode.Length - key_start -1);
+                AssCmdVM.Input = key.Split('{', '}', ',', '(', ')')[0];
+            }
+
+            if(orgAssCode[orgIndex] == '\\')
+            {
+                key_start = orgIndex;
+                AssCmdVM.Show = Visibility.Visible;
+                AssCmdVM.Input = "";
+            }
+        }
+
+        #endregion
     }
 }

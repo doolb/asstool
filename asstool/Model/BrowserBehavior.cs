@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
+using CefSharp.Wpf;
+
 namespace asstool.Model
 {
     public class BrowserBehavior
@@ -16,22 +18,23 @@ namespace asstool.Model
                 typeof(BrowserBehavior),
                 new FrameworkPropertyMetadata(OnHtmlChanged));
 
-        [AttachedPropertyBrowsableForType(typeof(WebBrowser))]
-        public static string GetHtml(WebBrowser d)
+        [AttachedPropertyBrowsableForType(typeof(ChromiumWebBrowser))]
+        public static string GetHtml(ChromiumWebBrowser d)
         {
             return (string)d.GetValue(HtmlProperty);
         }
 
-        public static void SetHtml(WebBrowser d, string value)
+        public static void SetHtml(ChromiumWebBrowser d, string value)
         {
             d.SetValue(HtmlProperty, value);
         }
 
         static void OnHtmlChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            WebBrowser webBrowser = dependencyObject as WebBrowser;
+            ChromiumWebBrowser webBrowser = dependencyObject as ChromiumWebBrowser;
             if (webBrowser != null)
-                webBrowser.NavigateToString(e.NewValue as string ?? "&nbsp;");
+                webBrowser.LoadHtml(e.NewValue as string ?? "&nbsp;", "http://rendering/");
+
         }
     }
 }

@@ -50,5 +50,14 @@ namespace asstool
         }
 
 
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            MainViewModel.Instance.OrgIndex = (sender as TextBox).SelectionStart;
+
+            if (e.Key == Key.System)
+                MainViewModel.Instance.AssCmdVM.Show = Visibility.Visible;
+        }
+
+
     }
 }
