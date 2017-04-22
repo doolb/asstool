@@ -122,7 +122,6 @@ namespace asstool.Model
 
             // append style
             sb.Append(HtmlStyle);
-            sb.Append("<b>");
 
             int i = 0;
             for (; i < ass_code.Length; i++)
@@ -171,7 +170,6 @@ namespace asstool.Model
                 }
             }
 
-            sb.Append("</b>");
             return sb.ToString();
         }
 

@@ -127,12 +127,13 @@ namespace asstool.ViewModel
                 AssCmdVM.Input = "";
             }
 
-            if(orgAssCode[orgIndex] == '{')
+            if(orgAssCode[orgIndex] == '{' && orgAssCode.Last()!='}')
             {
                 int index = orgIndex;
                 orgAssCode = orgAssCode + '}';
                 RaisePropertyChanged("OrgAssCode");
-                OrgIndex = index + 1;
+                orgIndex = index + 1;
+                RaisePropertyChanged("OrgIndex");
             }
         }
 

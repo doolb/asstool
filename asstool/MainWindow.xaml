@@ -4,7 +4,6 @@
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:u2u="clr-namespace:Microsoft.Windows.Controls;assembly=U2UConsult.RichHtmlTextBlock"
         xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit"                   
-        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:model="clr-namespace:asstool.Model"                   
         xmlns:m="clr-namespace:asstool.View"
         xmlns:p="clr-namespace:asstool.Properties"                   
@@ -68,19 +67,14 @@
                                    IsHitTestVisible="True"
                                    Focusable="False"/>
             </Canvas>
-
-            <cef:ChromiumWebBrowser Grid.Row="1"
-                                    model:BrowserBehavior.Html="{Binding AssCode}"
-                                    Focusable="False"/>
-            <!--
             <u2u:RichTextBox Text="{Binding AssCode}"
-                                 FontSize="18"
+                             FontSize="18"
                              Grid.Row="1"
-                                 TextFormatter="{StaticResource HtmlFormatter}"
-                                 IsReadOnly="False"
-                                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                             TextFormatter="{StaticResource HtmlFormatter}"
+                             IsReadOnly="False"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             
-            -->
+            
         </Grid>
     </Grid>
 </metro:MetroWindow>
