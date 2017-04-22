@@ -25,10 +25,6 @@ namespace asstool.View
             InitializeComponent();
         }
 
-        private void ListBox_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

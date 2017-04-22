@@ -111,5 +111,10 @@ namespace asstool
             MainViewModel.Instance.AssCmdVM.Show = Visibility.Hidden;
         }
 
+        private void MetroWindow_LostFocus(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.Instance.AssCmdVM.Show = Visibility.Hidden;
+        }
+
     }
 }

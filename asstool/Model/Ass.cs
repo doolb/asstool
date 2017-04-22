@@ -16,8 +16,13 @@ namespace asstool.Model
 
         static AssDocument()
         {
-            string name = string.Format("ass.{0}.txt", Setting.Default.lang);
-            string path = Path.Combine("ass", name);
+            string[] args = Environment.GetCommandLineArgs();
+            string name;
+            if(args.Count() >1)
+                name = string.Format("ass.{0}.html", args[1]);
+            else
+                name = string.Format("ass.{0}.html", Setting.Default.lang);
+            string path = Path.Combine("assdoc", name);
 
             #region read ass document from file
             string key;

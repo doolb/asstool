@@ -1,0 +1,706 @@
+;ass document format
+;power by aegisub:http://docs.aegisub.org/3.2/ASS_Tags/
+;translate by google
+;
+;key
+;document ( use html ) see bellow
+;{
+;<div>
+;	<h3 style="color:#00CFFF">Name</h3>
+;	<p  style="color:#1CE32E"><b>command format</b></p>
+;	<div>
+;		example<br>
+;	</div>
+;	<div>
+;		details<br>
+;	</div>
+;</div>
+;}
+
+	
+	
+fs
+{
+<div>
+	<h3 style="color:#00CFFF">字體大小</h3>
+	<p  style="color:#1CE32E"><b>\fs<i>&lt;size&gt;</i></b></p>
+	<div>\fs<i>&lt;10&gt;</i><br>
+	    *&lt;size&gt;指的是文字縱向的像素數量。
+    </div>
+</div>
+
+}
+pos	
+{
+<div>
+	<h3 style="color:#00CFFF">字幕位置</h3>
+	<p  style="color:#1CE32E"><b>\pos(<i>&lt;X&gt;</i>,<i>&lt;Y&gt;</i>)</b></p>
+	<div>\pos(<i>&lt;470&gt;</i>,<i>&lt;260&gt;</i>)<br>
+	設置本行字幕的位置
+    </div>
+</div>
+}
+
+
+move
+{
+<div>
+	<h3 style="color:#00CFFF">移動</h3>
+	<p  style="color:#1CE32E">\move(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;)<br>
+	\move(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;,<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;)</p>
+	<div>
+		<p>\move(100,150,300,350)<br>
+		當這行文字出現在屏幕上時，字幕位於（100，150），然後字幕以穩定的速度移動到（300，350）
+		接著消失。</p>
+		<p>\move(100,150,300,350,500,1500)<br>
+		當這行文字出現在屏幕上時，字幕位於（100，150），在半秒後(500 毫秒)，字幕會在一秒內移動到（300，350）。
+		</p>
+	</div>
+</div>
+}
+
+
+i
+{
+<div>
+	<h3 style="color:#00CFFF">斜體</h3>
+	<p  style="color:#1CE32E"><b>\i1<br>\i0</b></p>
+	<div> 決定是否<em>傾斜</em> 字體。 <br>
+		1表示傾斜，0表示不傾斜。
+    </div>
+</div>
+}
+
+
+b
+{
+<div>
+	<h3 style="color:#00CFFF">粗體</h3>
+	<p  style="color:#1CE32E"><b>\b1<br>\b0<br>\b<i>&lt;weight&gt;</i></b></p>
+	<div> *大部分字體不支持自定義字體粗細；如支持，更改的粗細應為100的倍數；<br>
+		*100最細，400正常，700為粗體，900為極粗。 <br>
+		e.g. {\b100}How {\b300}bold {\b500}can {\b700}you {\b900}get?
+	</div>
+</div>
+}
+u
+{
+<div>
+	<h3 style="color:#00CFFF">下劃線 </h3>
+	<p  style="color:#1CE32E"><b>\u1<br>\u0</b></p>
+	<div>1表示<u>開啟</u>，0表示關閉。<br></div>
+</div>
+}
+
+s	
+{
+<div>
+	<h3 style="color:#00CFFF">刪除線</h3>
+	<p  style="color:#1CE32E"><b>\s1<br>\s0</b></p>
+	<div> 1表示<s>開啟</s>，0表示關閉。<br></div>
+</div>
+}
+bord
+{
+<div>
+	<h3 style="color:#00CFFF">邊框寬度</h3>
+	<p  style="color:#1CE32E"><b>\bord<i>&lt;size&gt;</i></b></p>
+	<div> *&lt;size&gt;可設為0，也可為小數；<br>
+    *請注意若文件→配置內的比例縮放邊框和陰影被勾選，邊框寬度效果會受影響。 <br>
+    e.g. \bord5, \bord0.5, \bord0【無邊框】<br>
+    *&lt;size&gt;可設為0，也可為小數；
+	</div>
+</div>
+}
+xbord
+{
+<div>
+	<h3 style="color:#00CFFF">橫向的字體邊框寬度(x)</h3>
+	<p  style="color:#1CE32E"><b>\xbord<i>&lt;size&gt;</i></b></p>
+	<div> 單獨設定橫向的字體邊框寬度(x)<br>
+*一行代碼中，在\xbord 或\ybord後使用\bord 指令的話，\xbord和\ybord效果會被覆蓋。
+    </div>
+</div>
+}
+ybord
+{
+<div>
+	<h3 style="color:#00CFFF">縱向的字體邊框寬度(y)</h3>
+	<p  style="color:#1CE32E"><b>\ybord<i>&lt;size&gt;</i></b></p>
+	<div> 縱向的字體邊框寬度(y)<br>
+*一行代碼中，在\xbord 或\ybord後使用\bord 指令的話，\xbord和\ybord效果會被覆蓋。
+    </div>
+</div>
+}
+shad
+{
+<div>
+	<h3 style="color:#00CFFF">陰影深度</h3>
+	<p  style="color:#1CE32E"><b>\shad<i>&lt;depth&gt;</i></b></p>
+	<div>
+        【陰影作用於文字背後，出現在右下角；經過顏色設置可造成 3D字體假象】 <br>
+        *&lt;depth&gt;可以為小數，不可為負數。
+	</div>
+</div>
+}
+xshad
+{
+<div>
+	<h3 style="color:#00CFFF">橫向的陰影深度(x)</h3>
+	<p  style="color:#1CE32E"><b>\xshad<i>&lt;depth&gt;</i></b></p>
+	<div>*&lt;size&gt;可設為0，可為小數，也可為負數。
+    </div>
+</div>
+}
+yshad
+{
+<div>
+	<h3 style="color:#00CFFF">縱向的陰影深度(y)</h3>
+	<p  style="color:#1CE32E"><b>\yshad<i>&lt;depth&gt;</i></b></p>
+	<div>*&lt;size&gt;可設為0，可為小數，也可為負數。
+    </div>
+
+</div>
+}
+
+be
+{
+<div>
+	<h3 style="color:#00CFFF">模糊邊緣</h3>
+	<p  style="color:#1CE32E"><b>\be0<br>\be1<br>\be<i>&lt;strength&gt;</i></b></p>
+	<div>\be1【模糊邊緣】\be0【不模糊邊緣】<br>*字體有邊框時以邊框顏色為準模糊邊緣，無邊框時以文字顏色為準模糊文字邊緣；<br>*模糊效果在字體較小時比較明顯，但是使用可以使文字看過去更柔和。 <br><br>
+\be&lt;strength&gt;
+<br>*字體有邊框時以邊框顏色為準模糊邊緣，無邊框時以文字顏色為準模糊文字邊緣；
+<br>*設置值必須為整數；<br>*因為模糊效果為漸變色，設置值過高沒有意義（末端幾乎透明）。
+	</div>
+</div>
+}
+blur
+{
+<div>
+	<h3 style="color:#00CFFF">模糊邊緣</h3>
+	<p  style="color:#1CE32E"><b>\blur<i>&lt;strength&gt;</i></b></p>
+	<p>*字體有邊框時以邊框顏色為準模糊邊緣，無邊框時以文字顏色為準模糊文字邊緣；<br>
+    *設置值可為小數；<br>
+    *用法與\be&lt;strength&gt;幾乎一樣，但是因為算法不同，在設置值較高的時候有很好的表現，但要注意設置值過高會給CPU帶來壓力。<br>
+	</p>
+</div>
+}
+
+fn
+{
+<div>
+	<h3 style="color:#00CFFF">字體名</h3>
+	<p  style="color:#1CE32E"><b>\fn<i>&lt;name&gt;</i></b></p>
+
+	<div>
+		e.g.           <br />
+        {\fnLucida Calligraphy}Think of you<br />
+        {\fn@微软雅黑 }知道@是乾嘛的了吧
+	</div>
+</div>
+}
+
+fscx
+{
+<div>
+	<h3 style="color:#00CFFF">字體沿X軸方向縮放</h3>
+	<p  style="color:#1CE32E"><b>\fscx<i>&lt;scale&gt;</i></b></p>
+	<div>
+        e.g.      <br />
+        \fscx50【寬度變為原來的一半】<br />
+        \fscx200【寬度變為原來的一倍】
+	</div>
+</div>
+}
+
+fscy
+{
+<div>
+	<h3 style="color:#00CFFF">字體沿Y軸方向縮放</h3>
+	<p  style="color:#1CE32E"><b>\fscy<i>&lt;scale&gt;</i></b></p>
+	<div>e.g.     <br />
+     \fscy50【高度變為原來的一半】 <br />
+     \fscy200【高度變為原來的一倍】
+	</div>
+</div>
+}
+
+fsp
+{
+<div>
+	<h3 style="color:#00CFFF">文字間距</h3>
+	<p  style="color:#1CE32E"><b>\fsp<i>&lt;spacing&gt;</i></b></p>
+	<div>
+        設置單獨每個字母的間隔<br />
+        &lt;spacing&gt; 可以為負數或者小數
+	</div>
+	<div>
+	</div>
+</div>
+}
+
+fr
+{
+<div>
+	<h3 style="color:#00CFFF">文字旋轉</h3>
+	<p  style="color:#1CE32E"><b>\fr<i>&lt;amount&gt;</i></b></p>
+	<div>
+		*\fr默認繞Z 軸（垂直於屏幕的軸）。 <br>
+\fr (= \frz)&lt;amount&gt; 【繞Z軸旋轉（逆時針為正，順時針為負）】<br><br />
+e.g. <br />
+        \fr-90 \fr90 {\frz-90\fn@微軟雅黑 }【繞Z 軸旋轉與 @字體結合效果】
+	</div>
+</div>
+}
+
+frx
+{
+<div>
+	<h3 style="color:#00CFFF">文字繞 X軸（水平軸）旋轉</h3>
+	<p  style="color:#1CE32E"><b>\frx<i>&lt;amount&gt;</i></b></p>
+	<div>
+		【 繞 X軸（水平軸）旋轉(為正值時字向後倒，為負時字向前傾)】
+	</div>
+	<div>
+	</div>
+</div>
+}
+fry
+{
+<div>
+	<h3 style="color:#00CFFF">文字繞 Y軸（水平軸）旋轉</h3>
+	<p  style="color:#1CE32E"><b>\fry<i>&lt;amount&gt;</i></b></p>
+	<div>
+		【繞 Y軸（豎直軸）旋轉(為正值時字左大右小，為負時字左小右大)】
+	</div>
+	<div>
+	</div>
+</div>
+}
+frz
+{
+<div>
+	<h3 style="color:#00CFFF">文字繞 Z軸（水平軸）旋轉</h3>
+	<p  style="color:#1CE32E"><b>\frz<i>&lt;amount&gt;</i></b></p>
+	<div>
+		*\frz繞Z 軸（垂直於屏幕的軸）。 <br>
+\fr (= \frz)&lt;amount&gt; 【繞Z軸旋轉（逆時針為正，順時針為負）】<br><br />
+e.g. <br />
+        \fr-90 \fr90 {\frz-90\fn@微軟雅黑 }【繞Z 軸旋轉與 @字體結合效果】
+	</div>
+	<div>
+	</div>
+</div>
+}
+
+fax
+{
+<div>
+	<h3 style="color:#00CFFF">文本在X軸上傾斜</h3>
+	<p  style="color:#1CE32E"><b>\fax<i>&lt;factor&gt;</i></b></p>
+	<div>*一般而言&lt;factor&gt;取較小的值，小於2的值效果都非常明顯；<br>
+    *在旋轉命令之後，傾斜所應用的軸為旋轉之後的軸，與初始軸無關。
+	</div>
+</div>
+}
+
+fay
+{
+<div>
+	<h3 style="color:#00CFFF">文本在Y轴上倾斜 </h3>
+	<p  style="color:#1CE32E"><b>\fay<i>&lt;factor&gt;</i></b></p>
+	<div>*一般而言&lt;factor&gt;取較小的值，小於2的值效果都非常明顯；<br>
+    *在旋轉命令之後，傾斜所應用的軸為旋轉之後的軸，與初始軸無關。
+	</div>
+</div>
+}
+fe
+{
+<div>
+	<h3 style="color:#00CFFF">字體編碼</h3>
+	<p  style="color:#1CE32E"><b>\fe<i>&lt;id&gt;</i></b></p>
+	<div>
+	e.g.  \fe0  【ANSI碼 (USA) 】 \fe128 【SHIFT_JIS 碼 (Japan) 】
+	</div>
+</div>
+}
+
+c
+{
+<div>
+	<h3 style="color:#00CFFF">設置顏色</h3>
+	<p  style="color:#1CE32E"><b>\c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\1c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\2c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\3c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;<br>
+		\4c&amp;H<i>&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;</i>&amp;</b></p>
+	<div>
+        \1c&amp;H&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;&amp; <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;(= \c&amp;H&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;&amp;) 【主要顏色 (原色) 】 <br>
+        \2c&amp;H&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;&amp;【卡拉 ok效果中的次要 (第二) 顏色】<br>
+        \3c&amp;H&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;&amp;【字體邊框顏色 】<br>
+        \4c&amp;H&lt;bb&gt;&lt;gg&gt;&lt;rr&gt;&amp;【字體陰影顏色】<br>
+        *&amp;……&amp;不可以省略；
+	</div>
+</div>
+}
+a
+{
+<div>
+	<h3 style="color:#00CFFF">設置透明度</h3>
+	<p  style="color:#1CE32E"><b>\alpha&amp;H<i>&lt;aa&gt;</i><br>
+		\1a&amp;H<i>&lt;aa&gt;</i><br>
+		\2a&amp;H<i>&lt;aa&gt;</i><br>
+		\3a&amp;H<i>&lt;aa&gt;</i><br>
+		\4a&amp;H<i>&lt;aa&gt;</i></b>
+    </p>
+	<div>
+        \alpha&amp;H&lt;aa&gt; 【一次性設置以下四者的透明度】<br>
+        \1a&amp;H&lt;aa&gt; 【文字原色透明度】<br>
+        \2a&amp;H&lt;aa&gt; 【卡拉 ok效果中的第二顏色透明度】<br>
+        \3a&amp;H&lt;aa&gt; 【字體邊框透明度】<br>
+        \4a&amp;H&lt;aa&gt; 【字體陰影透明度】<br>
+        *經實踐Set alpha代碼內的&amp;和H均可省略不寫；<br>
+        *&lt;aa&gt;採用十六進制（00【不透明】, 37【25%透明】80【50%透明】, FF【100%透明】）；<br>
+        *&lt;aa&gt;不區分大小寫；<br>
+        *超過80效果就不明顯了（也許是我打開方式不對_(:3」∠) _）。
+	</div>
+</div>
+}
+
+an
+{
+<div>
+	<h3 style="color:#00CFFF">柵格定位</h3>
+	<p  style="color:#1CE32E"><b>\an<i>&lt;pos&gt;</i></b></p>
+	<div>
+		*\pos和\move會覆蓋\an指令效果，但是\an的特徵會保留；<br>
+（如\pos(300,500)\an1，字幕是居左的，在字幕有兩行以上的情況下每行開頭均居左，否則是居中）
+		
+		<ol>
+			<li>底部 最左側</li>
+			<li>底部 居中</li>
+			<li>底部 最右側</li>
+			<li>中部 最左側</li>
+			<li>中部 居中</li>
+			<li>中部 最右側</li>
+			<li>頂部 最左側</li>
+			<li>頂部 居中</li>
+			<li>頂部 最右側</li>
+		</ol>
+		
+	</div>
+</div>
+}
+
+
+k
+{
+<div>
+	<h3 style="color:#00CFFF">卡拉OK特效</h3>
+	<p  style="color:#1CE32E"><b>\k<i>&lt;duration&gt;</i><br>
+		\K<i>&lt;duration&gt;</i><br>
+		\kf<i>&lt;duration&gt;</i><br>
+		\ko<i>&lt;duration&gt;</i></b></p>
+	<div>單位為厘秒 (cs) ，100cs = 1000ms = 1s。 <br>
+    \k&lt;duration&gt; 【卡拉 ok跳色效果，一個字一個字間斷變色】<br>
+    *&lt;duration&gt;的時間經過之後執行跳色命令。 <br>
+    e.g. {\k50}{\k80}Think {\k25}of {\k60}me<br>
+    【50cs之後 "Think"從次要顏色跳為主要顏色， 80cs後"of"跳為原色，25cs後"me"跳為原色】<br><br />
+    \kf&lt;duration&gt; or \K&lt;duration&gt; <br />
+    【卡拉 ok填充效果（與\k效果相似，但是有從左到右填充效果，較為平滑） 】
+    <br>*在&lt;duration&gt;時間段內填充完色。
+    <br>e.g. {\kf80}Think {\kf25}of {\kf60}me<br>
+    【80cs內 "Think"從次要顏色由左至右變成主要顏色， 25cs內"of"漸變為原色，60cs內"me"漸變為原色】<br><br />
+    \ko&lt;duration&gt; 【邊框卡拉 ok跳色效果（與\k效果相似）】<br>
+    e.g. {\ko50}{\ko80}Think {\ko25}of {\ko60}me<br>
+    【一開始所有邊框都沒有，50cs之後 "Think"的邊框跳色， 80cs後"of"的邊框跳色，25cs後"me"的邊框跳色】
+	</div>
+</div>
+}
+
+q
+{
+<div>
+	<h3 style="color:#00CFFF">換行方式</h3>
+	<p  style="color:#1CE32E"><b>\q<i>&lt;style&gt;</i></b></p>
+	<div>
+		0：智能換行，盡量使每行寬度一致，不能保持等寬時上行較寬。只有\N指令強制換行有效；<br>
+        1：於行尾詞處換行，僅\N斷行有效；<br>
+        2：不自動換行，\n及\N斷行有效；<br>
+        3：智能換行，盡量使每行寬度一致，不能保持等寬時下行較寬。只有\N指令強制換行有效。
+	</div>
+</div>
+}
+
+r
+{
+<div>
+	<h3 style="color:#00CFFF">重置字幕樣式</h3>
+	<p  style="color:#1CE32E"><b>\r<br>\r<i>&lt;style&gt;</i></b></p>
+	<div>
+		<pre>e.g. -Hey\N{\rAlternate}-Huh?\N{\r}-Who are you?</pre>
+		
+		<p>【假設此條字幕樣式為"Default"，則"Hey" 為Default style，"Huh?" 被改成了"Alternate"，"Who are you?" 又被恢復為Default style】</p >
+	</div>
+</div>
+}
+
+org
+{
+<div>
+	<h3 style="color:#00CFFF">旋轉原點</h3>
+	<p  style="color:#1CE32E"><b>\org(<i>&lt;X&gt;</i>,<i>&lt;Y&gt;</i>)</b></p>
+	<div>
+	*一旦旋轉/縮放中心被設定，則它就是固定不動的；<br>
+        *將該點設於極遠處、配合快速特效可以造成跳躍的視覺效果；(反正我不會用OTZ)<br>
+        *每條文本最多只能有一個org命令。
+	</div>
+	<div>
+	</div>
+</div>
+}
+
+fad
+{
+<div>
+	<h3 style="color:#00CFFF">淡入淡出</h3>
+	<p  style="color:#1CE32E"><b>\fad(<i>&lt;fadein&gt;</i>,<i>&lt;fadeout&gt;</i>)</b></p>
+	<div>
+	【開始時間到t1淡入，t2到結束時間淡出】<br>
+        *t1, t2單位為毫秒；<br>
+        *t1+t2必須小於最多等於本條字幕的持續時間；<br>
+        *t1=0，無淡入； t2=0，無淡出。
+	</div>
+	<div>
+	</div>
+</div>
+}
+
+fade
+{
+<div>
+	<h3 style="color:#00CFFF">淡入淡出(高級)</h3>
+	<p  style="color:#1CE32E"><b>\fade(<i>&lt;a1</i>&gt;,<i>&lt;a2</i>&gt;,<i>&lt;a3</i>&gt;,<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;,<i>&lt;t3</i>&gt;,<i>&lt;t4</i>&gt;)</b></p>
+	<div>e.g.  \fade (255, 32, 224, 0, 500, 2000, 2200)<br>【字幕從開始0s到0.5s由透明漸變為幾乎不透明，維持32的透明度1.5s，此後在0.2s之內由透明度32變為224（幾乎透明），此後維持幾乎透明狀態直至本條字幕時間結束】
+</div>
+<div>*透明度值為十進制，從0（不透明）到255（完全透明）;<br>
+    *時間以毫秒計；時間為累計時間；<br>
+    *七個參數都必須有；<br>
+    *fade命令中透明度標記影響 1c-4c所有顏色。 <br>
+    【t1之前透明度為a1，<br />
+    在t1到t2時間段透明度由a1漸變為a2，<br />
+    在t2到t3時間內透明度保持為a2，<br />
+    在t3到t4時間段透明度由a2漸變為a3，<br />
+    t4之後透明度保持為a3】
+	</div>
+</div>
+}
+
+t
+{
+<div>
+	<h3 style="color:#00CFFF">動態變換</h3>
+	<p  style="color:#1CE32E"><b>\t(<i>&lt;style modifiers&gt;</i>)<br>
+		\t(<i>&lt;accel&gt;</i>,<i>&lt;style modifiers&gt;</i>)<br>
+		\t(<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;,<i>&lt;style modifiers&gt;</i>)<br>
+		\t(<i>&lt;t1</i>&gt;,<i>&lt;t2</i>&gt;,<i>&lt;accel&gt;</i>,<i>&lt;style modifiers&gt;</i>)</b></p>
+	<div>
+       e.g.<br>
+        {\1c&amp;HFF0000&amp;\t(\1c&amp;H0000FF&amp;)}Hello! <br />
+        【“Hello!”由藍色變為紅色】<br><br />
+        {\an5\t(0,5000,\frz3600)}Wheee <br />
+        【“Wheee”在5s內勻速逆時針轉10圈】<br><br />
+        {\an5\t(0,5000,0.5,\frz3600)}Wheee <br />
+        【“Wheee”在5s內減速逆時針轉10圈】<br><br />
+        {\an5\fscx0\fscy0\t(0,500,\fscx100\fscy100)}Boo! <br />
+        【Boo!在0.5s內由一個點變成文字】<br />
+	</div>
+	<div>
+        \t(&lt;style modifiers&gt;) <br />
+        【在字幕持續時間內由\t前的狀態變成( )內狀態】<br><br />
+        \t(&lt;accel&gt;, &lt;style modifiers&gt;) <br />
+        【同上，速度非線性】<br><br />
+        \t(&lt;t1&gt;, &lt;t2&gt;, &lt;style modifiers&gt;) <br />
+        【在t1~t2時間內由\t前的狀態變成( )內狀態】<br><br />
+        \t(&lt;t1&gt;, &lt;t2&gt;, &lt;accel&gt;, &lt;style modifiers&gt;) <br />
+        【同上，速度非線性】<br><br />
+
+        *只有以下tags可以用於變換：<br>
+		<table>
+			<thead>
+			<tr>
+			<th>字體</th>
+			<th>幾何</th>
+			<th>其他效果</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			<td>\fs</td>
+			<td>\fscx</td>
+			<td>\bord</td>
+			</tr>
+			<tr>
+			<td>\fsp</td>
+			<td>\fscy</td>
+			<td>\xbord</td>
+			</tr>
+			<tr>
+			<td>\c</td>
+			<td>\frx</td>
+			<td>\ybord</td>
+			</tr>
+			<tr>
+			<td>\1c</td>
+			<td>\fry</td>
+			<td>\shad</td>
+			</tr>
+			<tr>
+			<td>\2c</td>
+			<td>\frz</td>
+			<td>\xshad</td>
+			</tr>
+			<tr>
+			<td>\3c</td>
+			<td>\fr</td>
+			<td>\yshad</td>
+			</tr>
+			<tr>
+			<td>\4c</td>
+			<td>\fax</td>
+			<td>\clip</td>
+			</tr>
+			<tr>
+			<td>\alpha</td>
+			<td>\fay</td>
+			<td>\iclip</td>
+			</tr>
+			<tr>
+			<td>\1a</td>
+			<td>&nbsp;</td>
+			<td>\be</td>
+			</tr>
+			<tr>
+			<td>\2a</td>
+			<td>&nbsp;</td>
+			<td>\blur</td>
+			</tr>
+			<tr>
+			<td>\3a</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+			<tr>
+			<td>\4a</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		</table>
+        *t1和t2單位為毫秒，時間為累計時間；<br>
+        *t1~t2的時間間隔為特效發生的時間，如果未指定，則為整條字幕持續時間；<br>
+        *&lt;accel&gt;可以實現非線性速度變化，具體為：<br />
+        &lt;accel&gt; 等於 1，速度為線性；<br />
+        &lt;accel&gt;在0和1之間 ，開始速度快結束速度慢；<br />
+        &lt;accel&gt; 大於 1，開始速度慢結束速度快。 <br>
+        *自己實踐的時候發現\(i)clip不好用，不如說和其代碼本身說明是矛盾的，無解ING<br>
+	</div>
+</div>
+}
+
+clip
+{
+<div>
+	<h3 style="color:#00CFFF">矩形蒙板 (rectangle)</h3>
+	<p  style="color:#1CE32E"><b>\clip(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;)<br>
+		\iclip(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;)</b></p>
+	<div>
+        e.g. <br />
+        \clip (0, 0, 704, 245) 
+	</div>
+	<div>
+        【只有矩形內的內容被顯示】<br>
+        *默認為矩形，以 (x1, y1), (x2, y2) 分別為對角線端點坐標。
+	</div>
+	
+<div>
+	<h3 style="color:#00CFFF">圖形蒙板 (vector drawing)</h3>
+	<p  style="color:#1CE32E"><b>\clip(<i>&lt;drawing commands&gt;</i>)<br>
+		\clip(<i>&lt;scale&gt;</i>,<i>&lt;drawing commands&gt;</i>)<br>
+		\iclip(<i>&lt;drawing commands&gt;</i>)<br>
+		\iclip(<i>&lt;scale&gt;</i>,<i>&lt;drawing commands&gt;</i>)</b></p>
+	<div>
+        e.g.
+		<pre>\clip(1,m 50 0 b 100 0 100 100 50 100 b 0 100 0 0 50 0)</pre>
+	</div>
+	<div>
+        *代碼使用方法、效果與Clip (rectangle) 一致，請結合Drawing tags自己探索
+	</div>
+</div>
+</div>
+}
+
+iclip
+{
+<div>
+	<h3 style="color:#00CFFF">矩形蒙板 (rectangle)</h3>
+	<p  style="color:#1CE32E"><b>
+		\iclip(<i>&lt;x1</i>&gt;,<i>&lt;y1</i>&gt;,<i>&lt;x2</i>&gt;,<i>&lt;y2</i>&gt;)</b></p>
+	<div>
+        e.g. <br />
+        \iclip (0, 0, 704, 245) 
+	</div>
+	<div>
+        【只有矩形內的內容不被顯示】<br>
+        *默認為矩形，以 (x1, y1), (x2, y2) 分別為對角線端點坐標。 <br />
+        *iclip的影響效果是整行、無視代碼放置位置的。
+	</div>
+    <div>
+        <h3 style="color:#00CFFF">圖形蒙板 (vector drawing)</h3>
+        <p style="color:#1CE32E">
+            <b> \iclip(<i>&lt;drawing commands&gt;</i>)<br>
+                \iclip(<i>&lt;scale&gt;</i>,<i>&lt;drawing commands&gt;</i>)
+            </b>
+        </p>
+        <div>
+            e.g.
+            <pre>\iclip(1,m 50 0 b 100 0 100 100 50 100 b 0 100 0 0 50 0)</pre>
+        </div>
+        <div>
+            *代碼使用方法、效果與Clip (rectangle) 一致，請結合Drawing tags自己探索
+        </div>
+    </div>
+
+</div>
+}
+p
+{
+<div>
+	<h3 style="color:#00CFFF">繪圖代碼</h3>
+	<p  style="color:#1CE32E"><b>\p&lt;0/1/..&gt; - Toggle drawing mode</b></p>
+	<div>\p1 【激活繪圖命令，1：1繪圖】<br>
+    \p0 【關閉繪圖】<br>
+    \p2 【激活繪圖命令，用2倍的分辨率繪圖，2：1繪圖】<br>
+    \p4 【激活繪圖命令，用大8倍 (2^ (4-1)) 的分辨率繪圖，8：1繪圖】<br>
+    * n &gt; 0，n為所擴大的範圍，用2^（n-1）轉化（可使所做圖像更精細）。
+	</div>
+	<div>
+	</div>
+</div>
+}
+pbo
+{
+<div>
+	<h3 style="color:#00CFFF">基線偏移</h3>
+	<p  style="color:#1CE32E"><b>\pbo<y> - Baseline offset</y></b></p>
+	<div>
+		e.g. \pbo-50【圖像沿Y軸向上平移50像素】 <br>
+\pbo100【圖像沿Y軸向下平移100像素】
+</div>
+<div>
+【圖像沿y軸平移】<br>*該命令只應用於y軸（縱向）。
+	</div>
+</div>
+}

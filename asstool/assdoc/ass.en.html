@@ -1,5 +1,5 @@
 ;ass document format
-;powerby aegisub:http://docs.aegisub.org/3.2/ASS_Tags/
+;power by aegisub:http://docs.aegisub.org/3.2/ASS_Tags/
 ;
 ;key
 ;document ( use html ) see bellow
@@ -131,7 +131,7 @@ b
 <div>
 	<h3 style="color:#00CFFF">Bold</h3>
 	<p  style="color:#1CE32E"><b>\b1<br>\b0<br>\b<i>&lt;weight&gt;</i></b></p>
-	<p>I am {\b1}not[\b0} amused.<br>
+	<p>I am {\b1}not{\b0} amused.<br>
 	The word “<b>not</b>” is written in boldface.</p>
 	<p>Switch <strong>boldface</strong> text on or off. Use <code>\b1</code> to enable boldface for the
 	following text and <code>\b0</code> to disable boldface again.</p>
@@ -192,7 +192,7 @@ shad
 	<h3 style="color:#00CFFF">Shadow distance</h3>
 	<p  style="color:#1CE32E"><b>\shad<i>&lt;depth&gt;</i></b></p>
 	<p>Set the distance from the text to position the shadow. Set the depth to 0
-	(zero) to disable shadow entirely. Works similar to <a href="http://docs.aegisub.org/3.2/ASS_Tags/#bordersize">\bord</a>.<p></p>
+	(zero) to disable shadow entirely. Works similar to <a href="http://docs.aegisub.org/3.2/ASS_Tags/#bordersize">\bord</a>.
 	</p>
 </div>
 }
@@ -260,7 +260,7 @@ fn
 	<p>
 		Set the font face to use for the following text. There should be no space
 between <code>\fn</code> and the div name, and you should not put parentheses or similar
-around the font name either.<p></p>
+around the font name either.
 
 	</p>
 </div>
@@ -321,10 +321,10 @@ fr
 		<p>Perform an animation where the text performs 10 full revolutions on the Z axis. Also see the <a href="http://docs.aegisub.org/3.2/ASS_Tags/#animatedtransform">\t</a> tag.</p>
 	</div>
 	<div>
-		The <code>\fr</code> tag is a shortcut for <code>\frz</code>.
-		<li>The <strong>Z axis</strong> runs perpendicular to the screen. Rotating on it (with
+		The <code>\fr</code> tag is a shortcut for <code>\frz</code>.<br />
+		The <strong>Z axis</strong> runs perpendicular to the screen. Rotating on it (with
 positive values) causes the text to rotate in 2D, counterclockwise (as
-standard for degrees).</li>
+standard for degrees).
 	</div>
 </div>
 }
@@ -339,9 +339,9 @@ frx
 		<p>Rotate the text 45 degrees on the X axis.</p>
 	</div>
 	<div>
-		<li>The <strong>X axis</strong> runs horizontally on the screen. Rotating on it (with
+		The <strong>X axis</strong> runs horizontally on the screen. Rotating on it (with
 positive values) causes an effect where the top of the text moves farther
-"into" the screen while the bottom moves "out" of the screen.</li>	
+"into" the screen while the bottom moves "out" of the screen.
 	</div>
 </div>
 }
@@ -355,9 +355,9 @@ fry
 		<p>Rotate the text 45 degrees in opposite direction on the Y axis.</p>
 	</div>
 	<div>
-		<li>The <strong>Y axis</strong> runs vertically on the screen. Rotating on it (with positive
+		The <strong>Y axis</strong> runs vertically on the screen. Rotating on it (with positive
 values) causes the text to rotate so that the left moves "outside" the
-screen, when the right moves "into" the screen.</li>
+screen, when the right moves "into" the screen.
 	</div>
 </div>
 }
@@ -371,9 +371,9 @@ frz
 		<p>This is because 330 degrees is 30 degrees less than a full rotation of 360 degrees.</p>
 	</div>
 	<div>
-		<li>The <strong>Z axis</strong> runs perpendicular to the screen. Rotating on it (with
+		The <strong>Z axis</strong> runs perpendicular to the screen. Rotating on it (with
 positive values) causes the text to rotate in 2D, counterclockwise (as
-standard for degrees).</li>
+standard for degrees).
 	</div>
 </div>
 }
@@ -492,16 +492,17 @@ a
 		\3a&amp;H<i>&lt;aa&gt;</i><br>
 		\4a&amp;H<i>&lt;aa&gt;</i></b>
 	<div>
-		<pre>\alpha&amp;H80&amp;</pre>
-		<p>Set the alpha of all components to hexadecimal 80, decimal 128, making the
-			text 50% transparent in general.</p>
+		<pre>\alpha&amp;H80&amp;</pre><br />
+		Set the alpha of all components to hexadecimal 80, decimal 128, making the
+			text 50% transparent in general.
+        
 			
-		<pre>\1a&amp;HFF&amp;</pre>
-		<p>Set the primary fill alpha to hexadecimal FF, decimal 255, making it invisible
-			and effectively leaving only the border and shadow.</p>
+		<pre>\1a&amp;HFF&amp;</pre><br />
+		Set the primary fill alpha to hexadecimal FF, decimal 255, making it invisible
+			and effectively leaving only the border and shadow.
 	</div>
 	<div>
-		<p>Set the alpha (transparency) of the text.</p>
+		Set the alpha (transparency) of the text.<br />
 		<ul>
 			<li><code>\alpha</code> sets the alpha of all components at once.</li>
 			<li><code>\1a</code> sets the primary fill alpha.</li>
@@ -509,9 +510,9 @@ a
 			standard karaoke.</li>
 			<li><code>\3a</code> sets the border alpha.</li>
 			<li><code>\4a</code> sets the shadow alpha.</li>
-		</ul>
-		<p>An alpha of 00 (zero) means opaque/fully visible, and an alpha of FF (ie. 255
-			in decimal) is fully transparent/invisible.</p>
+		</ul><br />
+		An alpha of 00 (zero) means opaque/fully visible, and an alpha of FF (ie. 255
+			in decimal) is fully transparent/invisible.
 	</div>
 </div>
 }

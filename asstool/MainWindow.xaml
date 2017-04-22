@@ -11,7 +11,8 @@
         Title="AssTool" Height="650" Width="525"
         ShowTitleBar="False"
         Style="{StaticResource WindowStyle}"
-        MouseUp="MetroWindow_MouseUp">
+        MouseUp="MetroWindow_MouseUp"
+                   LostFocus="MetroWindow_LostFocus">
     <Grid Margin="5">
         <!--#region grid row and column define--> 
         <Grid.RowDefinitions>
