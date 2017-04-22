@@ -126,6 +126,14 @@ namespace asstool.ViewModel
                 AssCmdVM.Show = Visibility.Visible;
                 AssCmdVM.Input = "";
             }
+
+            if(orgAssCode[orgIndex] == '{')
+            {
+                int index = orgIndex;
+                orgAssCode = orgAssCode + '}';
+                RaisePropertyChanged("OrgAssCode");
+                OrgIndex = index + 1;
+            }
         }
 
         #endregion

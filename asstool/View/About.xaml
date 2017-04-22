@@ -4,11 +4,11 @@
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:p="clr-namespace:asstool.Properties"
         xmlns:u2u="clr-namespace:Microsoft.Windows.Controls;assembly=U2UConsult.RichHtmlTextBlock"
-        Title="About" Height="300" Width="300"
+        Title="About" Height="300" Width="600"
         TitleAlignment="Center"
         Style="{StaticResource WindowStyle}">
     <Grid>
-        <TextBlock Text="test"
+        <TextBlock Text="Project:https://github.com/doolb/asstool"
                    FontSize="21"
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
         

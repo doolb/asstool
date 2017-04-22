@@ -11,8 +11,7 @@
         Title="AssTool" Height="650" Width="525"
         ShowTitleBar="False"
         Style="{StaticResource WindowStyle}"
-        MouseUp="MetroWindow_MouseUp"
-                   LostFocus="MetroWindow_LostFocus">
+        MouseUp="MetroWindow_MouseUp">
     <Grid Margin="5">
         <!--#region grid row and column define--> 
         <Grid.RowDefinitions>
@@ -56,7 +55,9 @@
                      PreviewKeyDown="TextBox_KeyDown"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      Grid.Row="0"
-                     Name="input"/>
+                     Name="input"
+                     GotKeyboardFocus="input_GotKeyboardFocus"
+                     LostKeyboardFocus="input_LostKeyboardFocus"/>
 
 
 
@@ -64,11 +65,13 @@
                 <m:AssIntellisense DataContext="{Binding AssCmdVM}"
                                Canvas.Left="{Binding AssCmdLeft}"
                                Canvas.Top ="{Binding AssCmdTop}"
-                                   IsHitTestVisible="True"/>
+                                   IsHitTestVisible="True"
+                                   Focusable="False"/>
             </Canvas>
 
             <cef:ChromiumWebBrowser Grid.Row="1"
-                                    model:BrowserBehavior.Html="{Binding AssCode}"/>
+                                    model:BrowserBehavior.Html="{Binding AssCode}"
+                                    Focusable="False"/>
             <!--
             <u2u:RichTextBox Text="{Binding AssCode}"
                                  FontSize="18"

@@ -94,8 +94,7 @@ namespace asstool.Model
                 list.Add(key);
             }
 
-            list.Sort();
-            return list;
+            return list.OrderBy(x => x.Length).ToList();
         }
     }
 
